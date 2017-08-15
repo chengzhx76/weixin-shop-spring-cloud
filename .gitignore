@@ -1,0 +1,15 @@
+#忽略的文件及文件夹
+target
+logs
+temp
+.idea
+*.iml
+
+jdbc.properties
+rabbitmq.properties
+system.properties
+redis.properties
+
+#rebel.xml
+#不忽略的文件
+!.gitignore
