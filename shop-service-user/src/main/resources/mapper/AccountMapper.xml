@@ -52,7 +52,7 @@
           AND status = #{status}
         </when>
         <otherwise>
-          AND status != 'DELETE'
+          AND status != '4'
         </otherwise>
       </choose>
     </where>
