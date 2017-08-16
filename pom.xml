@@ -7,6 +7,8 @@
     <modules>
         <module>shop-service-user</module>
         <module>shop-common-config</module>
+        <module>shop-common</module>
+        <module>shop-common-entity</module>
     </modules>
 
     <parent>
@@ -26,6 +28,18 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- 公共的-->
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>shop-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>shop-common-entity</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!-- Spring -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
@@ -38,6 +52,59 @@
                 <artifactId>junit</artifactId>
                 <version>4.12</version>
                 <scope>test</scope>
+            </dependency>
+            <!-- DAO相关操作 Start-->
+            <!-- Mybatis -->
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>3.4.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-spring</artifactId>
+                <version>1.3.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>1.3.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-autoconfigure</artifactId>
+                <version>1.3.0</version>
+            </dependency>
+            <!-- 通用DAO -->
+            <dependency>
+                <groupId>tk.mybatis</groupId>
+                <artifactId>mapper-spring-boot-starter</artifactId>
+                <version>1.1.3</version>
+            </dependency>
+            <!-- 通用分页 -->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>1.1.3</version>
+            </dependency>
+            <!-- 连接池 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>1.1.2</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>1.1.2</version>
+            </dependency>
+            <!-- DAO相关操作 END-->
+
+            <!-- Tools -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>3.3.2</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
