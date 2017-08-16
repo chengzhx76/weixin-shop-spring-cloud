@@ -2,7 +2,6 @@ package com.github.chengzhx76.service.user.entity;
 
 
 import com.github.chengzhx76.shop.common.entity.DataEntity;
-import com.github.chengzhx76.shop.common.entity.enums.Sex;
 
 import java.util.Date;
 
@@ -19,7 +18,7 @@ public class Member extends DataEntity<Member> {
     private String address;
     private String email;
     private String idcard;
-    private Sex sex;
+    private String sex;
     private Date birthday;
     private int regionProvinceId;
     private int regionCityId;
@@ -91,11 +90,11 @@ public class Member extends DataEntity<Member> {
         this.idcard = idcard;
     }
 
-    public Sex getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(Sex sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 

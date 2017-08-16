@@ -1,7 +1,6 @@
 package com.github.chengzhx76.service.user.entity;
 
 
-import com.github.chengzhx76.service.user.entity.enumType.TXType;
 import com.github.chengzhx76.shop.common.entity.DataEntity;
 
 /**
@@ -15,7 +14,7 @@ public class BonusPointRecord extends DataEntity<BonusPointRecord> {
     private int txBonusPoints;
     private int frozenBonusPoints;
     private int afterBonusPoints;
-    private TXType txType;
+    private String txType;
     private String behaviorId;
     private String txResult;
 
@@ -66,11 +65,11 @@ public class BonusPointRecord extends DataEntity<BonusPointRecord> {
         this.afterBonusPoints = afterBonusPoints;
     }
 
-    public TXType getTxType() {
+    public String getTxType() {
         return txType;
     }
 
-    public void setTxType(TXType txType) {
+    public void setTxType(String txType) {
         this.txType = txType;
     }
 

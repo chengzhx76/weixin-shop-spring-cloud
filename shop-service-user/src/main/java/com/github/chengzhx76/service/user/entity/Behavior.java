@@ -1,7 +1,6 @@
 package com.github.chengzhx76.service.user.entity;
 
 
-import com.github.chengzhx76.service.user.entity.enumType.BehaviorType;
 import com.github.chengzhx76.shop.common.entity.DataEntity;
 
 /**
@@ -12,7 +11,7 @@ import com.github.chengzhx76.shop.common.entity.DataEntity;
  */
 @Deprecated
 public class Behavior extends DataEntity<Behavior> {
-    private BehaviorType behaviorType;
+    private String behaviorType;
     private String name;
     private String oid;
 
@@ -32,11 +31,11 @@ public class Behavior extends DataEntity<Behavior> {
         this.oid = oid;
     }
 
-    public BehaviorType getBehaviorType() {
+    public String getBehaviorType() {
         return behaviorType;
     }
 
-    public void setBehaviorType(BehaviorType behaviorType) {
+    public void setBehaviorType(String behaviorType) {
         this.behaviorType = behaviorType;
     }
 

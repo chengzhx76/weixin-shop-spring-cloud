@@ -11,6 +11,6 @@ public interface BehaviorType {
     TICKET;*/
 
     String BONUSPOINT = "1";
-    String CASH = "1";
-    String TICKET = "1";
+    String CASH = "2";
+    String TICKET = "3";
 }

@@ -1,7 +1,5 @@
 package com.github.chengzhx76.service.user.entity;
 
-import com.github.chengzhx76.service.user.entity.enumType.Credit;
-import com.github.chengzhx76.service.user.entity.enumType.SourceFrom;
 import com.github.chengzhx76.shop.common.entity.DataEntity;
 
 import java.math.BigDecimal;
@@ -15,7 +13,7 @@ public class Account extends DataEntity<Account> {
     private String avatar;
     private String nickname;
     private String accountLevelId;
-    private Credit credit;
+    private String credit;
     private String username;
     private String password;
     private int bonusPointUsable;
@@ -23,7 +21,7 @@ public class Account extends DataEntity<Account> {
     private BigDecimal balance;
     private boolean isEmployee;
     private String ip;
-    private SourceFrom sourceFrom;
+    private String sourceFrom;
 
     public Account() {
     }
@@ -77,11 +75,11 @@ public class Account extends DataEntity<Account> {
         this.accountLevelId = accountLevelId;
     }
 
-    public Credit getCredit() {
+    public String getCredit() {
         return credit;
     }
 
-    public void setCredit(Credit credit) {
+    public void setCredit(String credit) {
         this.credit = credit;
     }
 
@@ -125,11 +123,11 @@ public class Account extends DataEntity<Account> {
         this.ip = ip;
     }
 
-    public SourceFrom getSourceFrom() {
+    public String getSourceFrom() {
         return sourceFrom;
     }
 
-    public void setSourceFrom(SourceFrom sourceFrom) {
+    public void setSourceFrom(String sourceFrom) {
         this.sourceFrom = sourceFrom;
     }
 }

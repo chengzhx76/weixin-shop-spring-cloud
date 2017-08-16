@@ -2,7 +2,6 @@ package com.github.chengzhx76.service.user.entity;
 
 
 import com.github.chengzhx76.shop.common.entity.DataEntity;
-import com.github.chengzhx76.shop.common.entity.enums.Sex;
 
 /**
  * Desc: 配送地址
@@ -18,7 +17,7 @@ public class DeliveryAddress extends DataEntity<DeliveryAddress> {
     private String consignee;
     private String address;
     private String mobile;
-    private Sex sex;
+    private String sex;
     private String tag;
     private String telephone;
     private String email;
@@ -33,11 +32,11 @@ public class DeliveryAddress extends DataEntity<DeliveryAddress> {
         this.isDefault = isDefault;
     }
 
-    public Sex getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(Sex sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 
