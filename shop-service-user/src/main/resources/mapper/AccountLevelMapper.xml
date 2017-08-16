@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.chengzhx76.service.user.dao.AccountLevelDaoMapper">
+  <sql id="tableName">account_level</sql>
+  <sql id="columns">
+    a.id,a.name,a.level,a.need_ronus_point,a.next_level_need_point,a.reduct_percent,a.consume_scale,a.free_frequency,a.is_enable,
+    a.remarks,a.create_date,a.update_date,a.status
+  </sql>
+  <sql id="insertColumns">
+    id,account_id,name,need_ronus_point,next_level_need_point,reduct_percent,consume_scale,free_frequency,is_enable,
+    remarks,create_date,update_date,status
+  </sql>
+  <sql id="accountLevelIf">
+    <if test="id != null and id != ''">id=#{id},</if>
+    <if test="level != null and level != ''">level=#{level},</if>
+    <if test="name != null and name != ''">name=#{name},</if>
+    <if test="needRonusPoint != null and needRonusPoint != ''">need_ronus_point=#{needRonusPoint},</if>
+    <if test="nextLevelNeedPoint != null and nextLevelNeedPoint != ''">next_level_need_point=#{nextLevelNeedPoint},</if>
+    <if test="reductPercent != null and reductPercent != ''">reduct_percent=#{reductPercent},</if>
+    <if test="consumeScale != null and consumeScale != ''">consume_scale=#{consumeScale},</if>
+    <if test="freeFrequency != null and freeFrequency != ''">free_frequency=#{freeFrequency},</if>
+    <if test="isEnable != null">is_enable=#{isEnable},</if>
+    <if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
+    <if test="createDate != null and createDate != ''">create_date=#{createDate},</if>
+    <if test="updateDate != null and updateDate != ''">update_date=#{updateDate},</if>
+    <if test="status != null and status != ''">status=#{status}</if>
+  </sql>
+  <sql id="accountLevelSelector">
+    select
+      <include refid="columns"/>
+    from
+      <include refid="tableName"/> AS a
+  </sql>
+
+  <sql id="accountLevelWhere">
+    <where>
+      <if test="id != null and id != ''">
+        id = #{id}
+      </if>
+      <if test="level != null and level != ''">
+        AND level = #{level}
+      </if>
+      <if test="isEnable != null">
+        AND is_enable = #{isEnable}
+      </if>
+      <choose>
+        <when test="status != null and status !=''">
+          AND status = #{status}
+        </when>
+        <otherwise>
+          AND status != 'DELETE'
+        </otherwise>
+      </choose>
+    </where>
+  </sql>
+
+  <sql id="accountLevelUpdate">
+    <trim prefix="SET" suffixOverrides=",">
+      <include refid="accountLevelIf"/>
+    </trim>
+  </sql>
+
+<!-- =================================================================== -->
+
+  <select id="load" parameterType="AccountLevel" resultType="AccountLevel">
+    <include refid="accountLevelSelector"/>
+    <include refid="accountLevelWhere"/>
+  </select>
+
+  <!-- 获取全部 -->
+  <select id="loadAll" resultType="AccountLevel">
+    <include refid="accountLevelSelector"/>
+    <include refid="accountLevelWhere"/>
+  </select>
+
+  <!-- 更新 -->
+  <update id="update" parameterType="AccountLevel">
+    UPDATE <include refid="tableName"/>
+    <include refid="accountLevelUpdate"/>
+    <include refid="accountLevelWhere"/>
+  </update>
+  <!-- 插入 -->
+  <insert id="save" parameterType="AccountLevel">
+    INSERT INTO
+    <include refid="tableName"/>
+    (
+    <include refid="insertColumns"/>
+    )
+    VALUES
+    (
+    #{id},#{level},#{name},#{needRonusPoint},#{nextLevelNeedPoint},#{reductPercent},#{consumeScale},#{freeFrequency},#{isEnable},
+    #{remarks},#{createDate},#{updateDate},#{status}
+    )
+  </insert>
+
+</mapper>
+

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.chengzhx76.service.user.dao.DeliveryAddressDaoMapper">
+  <sql id="tableName">delivery_address</sql>
+  <sql id="columns">
+    d.id,d.account_id,d.region_province_id,d.region_city_id,d.region_country_id,
+    d.consignee,d.address,d.mobile,d.sex,d.tag,d.telephone,d.email,d.post_code,d.is_default,
+    d.remarks,d.create_date,d.update_date,d.status
+  </sql>
+  <sql id="insertColumns">
+    id,account_id,region_province_id,region_city_id,region_country_id,
+    consignee,address,mobile,telephone,email,sex,tag,post_code,is_default,
+    remarks,create_date,update_date,status
+  </sql>
+  <sql id="deliveryAddressIf">
+    <if test="id != null and id != ''">id=#{id},</if>
+    <if test="accountId != null and accountId != ''">account_id=#{accountId},</if>
+    <if test="regionProvinceId != null and regionProvinceId != ''">region_province_id=#{regionProvinceId},</if>
+    <if test="regionCityId != null and regionCityId != ''">region_city_id=#{regionCityId},</if>
+    <if test="regionCountryId != null and regionCountryId != ''">region_country_id=#{regionCountryId},</if>
+    <if test="consignee != null and consignee != ''">email=#{consignee},</if>
+    <if test="address != null and address != ''">address=#{address},</if>
+    <if test="mobile != null and mobile != ''">mobile=#{mobile},</if>
+    <if test="sex != null">sex=#{sex},</if>
+    <if test="tag != null and tag != ''">tag=#{tag},</if>
+    <if test="telephone != null and telephone != ''">telephone=#{telephone},</if>
+    <if test="email != null and email != ''">email=#{email},</if>
+    <if test="postCode != null and postCode != ''">post_code=#{postCode},</if>
+    <if test="isDefault != null and isDefault != ''">is_default=#{isDefault},</if>
+    <if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
+    <if test="createDate != null and createDate != ''">create_date=#{createDate},</if>
+    <if test="updateDate != null and updateDate != ''">update_date=#{updateDate},</if>
+    <if test="status != null">status=#{status}</if>
+  </sql>
+  <sql id="deliveryAddressSelector">
+    select
+      <include refid="columns"/>
+    from
+      <include refid="tableName"/> AS d
+  </sql>
+
+  <sql id="deliveryAddressWhere">
+    <where>
+      <if test="id != null and id != ''">
+        id = #{id}
+      </if>
+      <if test="accountId != null and accountId != ''">
+        AND account_id = #{accountId}
+      </if>
+      <if test="isDefault != null">
+        AND is_default = #{isDefault}
+      </if>
+      <choose>
+        <when test="status != null">
+          AND status = #{status}
+        </when>
+        <otherwise>
+          AND status != 'DELETE'
+        </otherwise>
+      </choose>
+    </where>
+  </sql>
+
+  <sql id="deliveryAddressUpdate">
+    <trim prefix="SET" suffixOverrides=",">
+      <include refid="deliveryAddressIf"/>
+    </trim>
+  </sql>
+
+<!-- =================================================================== -->
+
+  <select id="load" parameterType="DeliveryAddress" resultType="DeliveryAddress">
+    <include refid="deliveryAddressSelector"/>
+    <include refid="deliveryAddressWhere"/>
+  </select>
+
+  <!-- 获取全部 -->
+  <select id="loadAll" parameterType="DeliveryAddress" resultType="DeliveryAddress">
+    <include refid="deliveryAddressSelector"/>
+    <include refid="deliveryAddressWhere"/>
+  </select>
+
+  <!-- 更新 -->
+  <update id="update" parameterType="DeliveryAddress">
+    UPDATE <include refid="tableName"/>
+    <include refid="deliveryAddressUpdate"/>
+    <include refid="deliveryAddressWhere"/>
+  </update>
+  <!-- 插入 -->
+  <insert id="save" parameterType="DeliveryAddress">
+    INSERT INTO
+    <include refid="tableName"/>
+    (
+    <include refid="insertColumns"/>
+    )
+    VALUES
+    (
+    #{id},#{accountId},#{regionProvinceId},#{regionCityId},#{regionCountryId},
+    #{consignee},#{address},#{mobile},#{sex},#{tag},#{telephone},#{email},#{postCode},#{isDefault},
+    #{remarks},#{createDate},#{updateDate},#{status}
+    )
+  </insert>
+
+</mapper>
+

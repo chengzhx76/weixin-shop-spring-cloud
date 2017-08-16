@@ -1,7 +1,7 @@
 package com.github.chengzhx76.service.user.entity;
 
-import com.github.chengzhx76.service.user.enumType.Credit;
-import com.github.chengzhx76.service.user.enumType.SourceFrom;
+import com.github.chengzhx76.service.user.entity.enumType.Credit;
+import com.github.chengzhx76.service.user.entity.enumType.SourceFrom;
 import com.github.chengzhx76.shop.common.entity.DataEntity;
 
 import java.math.BigDecimal;

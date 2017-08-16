@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.chengzhx76.service.user.dao.MemberDaoMapper">
+  <sql id="tableName">member</sql>
+  <sql id="columns">
+    m.id,m.account_id,m.name,m.employer,m.mobile,m.address,m.email,m.idcard,m.sex,m.birthday,m.region_province_id,
+    m.region_city_id,m.region_country_id,m.telephone,m.post_code,m.income_month,m.job,m.hobby,
+    m.remarks,m.create_date,m.update_date,m.status
+  </sql>
+  <sql id="insertColumns">
+    id,account_id,name,employer,mobile,address,email,idcard,sex,birthday,region_province_id,
+    region_city_id,region_country_id,telephone,post_code,income_month,job,hobby,
+    remarks,create_date,update_date,status
+  </sql>
+  <sql id="memberIf">
+    <if test="id != null and id != ''">id=#{id},</if>
+    <if test="accountId != null and accountId != ''">account_id=#{accountId},</if>
+    <if test="name != null and name != ''">name=#{name},</if>
+    <if test="employer != null and employer != ''">employer=#{employer},</if>
+    <if test="mobile != null and mobile != ''">mobile=#{mobile},</if>
+    <if test="address != null and address != ''">address=#{address},</if>
+    <if test="email != null and email != ''">email=#{email},</if>
+    <if test="idcard != null and idcard != ''">idcard=#{idcard},</if>
+    <if test="sex != null and sex != ''">sex=#{sex},</if>
+    <if test="birthday != null and birthday != ''">birthday=#{birthday},</if>
+    <if test="regionProvinceId != null and regionProvinceId != ''">region_city_id=#{regionProvinceId},</if>
+    <if test="regionCityId != null and regionCityId != ''">region_city_id=#{regionCityId},</if>
+    <if test="regionCountryId != null and regionCountryId != ''">region_country_id=#{regionCountryId},</if>
+    <if test="telephone != null and telephone != ''">telephone=#{telephone},</if>
+    <if test="postCode != null and postCode != ''">post_code=#{postCode},</if>
+    <if test="incomeMonth != null and incomeMonth != ''">income_month=#{incomeMonth},</if>
+    <if test="job != null and job != ''">job=#{job},</if>
+    <if test="hobby != null and hobby != ''">hobby=#{hobby},</if>
+    <if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
+    <if test="createDate != null and createDate != ''">create_date=#{createDate},</if>
+    <if test="updateDate != null and updateDate != ''">update_date=#{updateDate},</if>
+    <if test="status != null and status != ''">status=#{status}</if>
+  </sql>
+  <sql id="memberSelector">
+    select
+      <include refid="columns"/>
+    from
+      <include refid="tableName"/> AS m
+  </sql>
+
+  <sql id="memberWhere">
+    <where>
+      <if test="id != null and id != ''">
+        id = #{id}
+      </if>
+      <if test="accountId != null and accountId != ''">
+        AND account_id = #{accountId}
+      </if>
+      <choose>
+        <when test="status != null and status !=''">
+          AND status = #{status}
+        </when>
+        <otherwise>
+          AND status != 'DELETE'
+        </otherwise>
+      </choose>
+    </where>
+  </sql>
+
+  <sql id="memberUpdate">
+    <trim prefix="SET" suffixOverrides=",">
+      <include refid="memberIf"/>
+    </trim>
+  </sql>
+
+<!-- =================================================================== -->
+
+  <select id="load" parameterType="Member" resultType="Member">
+    <include refid="memberSelector"/>
+    <include refid="memberWhere"/>
+  </select>
+
+  <!-- 获取全部 -->
+  <select id="loadAll" resultType="Member">
+    <include refid="memberSelector"/>
+    <include refid="memberWhere"/>
+  </select>
+
+  <!-- 更新 -->
+  <update id="update" parameterType="Member">
+    UPDATE <include refid="tableName"/>
+    <include refid="memberUpdate"/>
+    <include refid="memberWhere"/>
+  </update>
+  <!-- 插入 -->
+  <insert id="save" parameterType="Member">
+    INSERT INTO
+    <include refid="tableName"/>
+    (
+    <include refid="insertColumns"/>
+    )
+    VALUES
+    (
+    #{id},#{accountId},#{name},#{employer},#{mobile},#{address},#{email},#{idcard},#{sex},#{birthday},#{regionProvinceId},
+    #{regionCityId},#{regionCountryId},#{telephone},#{postCode},#{incomeMonth},#{job},#{hobby},
+    #{remarks},#{createDate},#{updateDate},#{status}
+    )
+  </insert>
+
+</mapper>
+

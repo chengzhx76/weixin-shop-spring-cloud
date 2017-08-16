@@ -21,7 +21,7 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
     /** 更新时间 **/
     protected Date updateDate;
     /** 状态 **/
-    protected Status status;
+    protected String status;
 
     public DataEntity() {
         super();
@@ -77,11 +77,11 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
         this.updateDate = updateDate;
     }
 
-    public Status getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 }

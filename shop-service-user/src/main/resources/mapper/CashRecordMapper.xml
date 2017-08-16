@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.chengzhx76.service.user.dao.CashRecordDaoMapper">
+  <sql id="tableName">cash_record</sql>
+  <sql id="columns">
+    c.id,c.account_id,c.before_money,c.tx_money,c.frozen_money,
+    c.after_bonus_points,c.tx_type,c.behavior_id,c.tx_result,
+    c.remarks,c.create_date,c.update_date,c.status
+  </sql>
+  <sql id="insertColumns">
+    id,account_id,before_money,tx_money,frozen_money,after_bonus_points,tx_type,behavior_id,tx_result,
+    remarks,create_date,update_date,status
+  </sql>
+  <sql id="behaviorIf">
+    <if test="id != null and id != ''">id=#{id},</if>
+    <if test="accountId != null and accountId != ''">account_id=#{accountId},</if>
+    <if test="beforeMoney != null and beforeMoney != ''">before_money=#{beforeMoney},</if>
+    <if test="txMoney != null and txMoney != ''">tx_money=#{txMoney},</if>
+    <if test="frozenMoney != null and frozenMoney != ''">frozen_money=#{frozenMoney},</if>
+    <if test="afterBonusPoints != null and afterBonusPoints != ''">after_bonus_points=#{afterBonusPoints},</if>
+    <if test="txType != null and txType != ''">tx_type=#{txType},</if>
+    <if test="behaviorId != null and behaviorId != ''">behavior_id=#{behaviorId},</if>
+    <if test="txResult != null and txResult != ''">tx_result=#{txResult},</if>
+
+    <if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
+    <if test="createDate != null and createDate != ''">create_date=#{createDate},</if>
+    <if test="updateDate != null and updateDate != ''">update_date=#{updateDate},</if>
+    <if test="status != null and status != ''">status=#{status}</if>
+  </sql>
+  <sql id="cashRecordSelector">
+    select
+      <include refid="columns"/>
+    from
+      <include refid="tableName"/> AS c
+  </sql>
+
+  <sql id="cashRecordWhere">
+    <where>
+      <if test="id != null and id != ''">
+        id = #{id}
+      </if>
+      <if test="accountId != null and accountId != ''">
+        AND account_id = #{accountId}
+      </if>
+      <choose>
+        <when test="status != null and status !=''">
+          AND status = #{status}
+        </when>
+        <otherwise>
+          AND status != 'DELETE'
+        </otherwise>
+      </choose>
+    </where>
+  </sql>
+
+  <sql id="cashRecordUpdate">
+    <trim prefix="SET" suffixOverrides=",">
+      <include refid="behaviorIf"/>
+    </trim>
+  </sql>
+
+<!-- =================================================================== -->
+
+  <select id="load" parameterType="CashRecord" resultType="CashRecord">
+    <include refid="cashRecordSelector"/>
+    <include refid="cashRecordWhere"/>
+  </select>
+
+  <!-- 获取全部 -->
+  <select id="loadAll" resultType="CashRecord">
+    <include refid="cashRecordSelector"/>
+    <include refid="cashRecordWhere"/>
+  </select>
+
+  <!-- 更新 -->
+  <update id="update" parameterType="CashRecord">
+    UPDATE <include refid="tableName"/>
+    <include refid="cashRecordUpdate"/>
+    <include refid="cashRecordWhere"/>
+  </update>
+  <!-- 插入 -->
+  <insert id="save" parameterType="CashRecord">
+    INSERT INTO
+    <include refid="tableName"/>
+    (
+    <include refid="insertColumns"/>
+    )
+    VALUES
+    (
+    #{id},#{accountId},#{beforeMoney},#{txMoney},#{frozenMoney},#{afterBonusPoints},#{txType},#{behaviorId},#{txResult},
+    #{remarks},#{createDate},#{updateDate},#{status}
+    )
+  </insert>
+
+  <select id="loadNewByUser" parameterType="CashRecord" resultType="CashRecord">
+    <include refid="cashRecordSelector"/>
+    <include refid="cashRecordWhere"/>
+    ORDER BY create_date DESC LIMIT 1
+  </select>
+</mapper>
+

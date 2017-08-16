@@ -1,6 +1,7 @@
 package com.github.chengzhx76.service.user.entity;
 
-import com.cheng.common.entity.DataEntity;
+
+import com.github.chengzhx76.shop.common.entity.DataEntity;
 
 /**
  * Desc: 省份

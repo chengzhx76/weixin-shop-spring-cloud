@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.chengzhx76.service.user.dao.CouponRecordDaoMapper">
+  <sql id="tableName">coupon_record</sql>
+  <sql id="columns">
+    c.id,c.account_id,c.coupon_code_id,c.tx_type,c.behavior_id,c.tx_result,
+    c.remarks,c.create_date,c.update_date,c.status
+  </sql>
+  <sql id="insertColumns">
+    id,account_id,coupon_code_id,tx_type,behavior_id,tx_result,
+    remarks,create_date,update_date,status
+  </sql>
+  <sql id="couponRecordIf">
+    <if test="id != null and id != ''">id=#{id},</if>
+    <if test="accountId != null and accountId != ''">account_id=#{accountId},</if>
+    <if test="couponCodeId != null and couponCodeId != ''">coupon_code_id=#{couponCodeId},</if>
+    <if test="txType != null and txType != ''">tx_type=#{txType},</if>
+    <if test="behaviorId != null and behaviorId != ''">behavior_id=#{behaviorId},</if>
+    <if test="txResult != null and txResult != ''">tx_result=#{txResult},</if>
+    <if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
+    <if test="createDate != null and createDate != ''">create_date=#{createDate},</if>
+    <if test="updateDate != null and updateDate != ''">update_date=#{updateDate},</if>
+    <if test="status != null and status != ''">status=#{status}</if>
+  </sql>
+  <sql id="couponRecordSelector">
+    select
+      <include refid="columns"/>
+    from
+      <include refid="tableName"/> AS c
+  </sql>
+
+  <sql id="couponRecordWhere">
+    <where>
+      <if test="id != null and id != ''">
+        id = #{id}
+      </if>
+      <if test="accountId != null and accountId != ''">
+        account_id = #{accountId}
+      </if>
+      <choose>
+        <when test="status != null and status !=''">
+          AND status = #{status}
+        </when>
+        <otherwise>
+          AND status != 'DELETE'
+        </otherwise>
+      </choose>
+    </where>
+  </sql>
+
+  <sql id="couponRecordUpdate">
+    <trim prefix="SET" suffixOverrides=",">
+      <include refid="couponRecordIf"/>
+    </trim>
+  </sql>
+
+<!-- =================================================================== -->
+
+  <select id="load" parameterType="CouponRecord" resultType="CouponRecord">
+    <include refid="couponRecordSelector"/>
+    <include refid="couponRecordWhere"/>
+  </select>
+  <select id="loadByUser" parameterType="CouponRecord" resultType="CouponRecord">
+    <include refid="couponRecordSelector"/>
+    <include refid="couponRecordWhere"/>
+  </select>
+
+  <!-- 获取全部 -->
+  <select id="loadAll" resultType="CouponRecord">
+    <include refid="couponRecordSelector"/>
+    <include refid="couponRecordWhere"/>
+  </select>
+
+  <!-- 更新 -->
+  <update id="update" parameterType="CouponRecord">
+    UPDATE <include refid="tableName"/>
+    <include refid="couponRecordUpdate"/>
+    <include refid="couponRecordWhere"/>
+  </update>
+  <!-- 插入 -->
+  <insert id="save" parameterType="Member">
+    INSERT INTO
+    <include refid="tableName"/>
+    (
+    <include refid="insertColumns"/>
+    )
+    VALUES
+    (
+    #{id},#{accountId},#{couponCodeId},#{txType},#{behaviorId},#{txResult},
+    #{remarks},#{createDate},#{updateDate},#{status}
+    )
+  </insert>
+
+</mapper>
+

@@ -5,9 +5,9 @@ package com.github.chengzhx76.shop.common.entity.enums;
  * Author: hp
  * Date: 2016/11/2
  */
-public enum Sex {
+public interface Sex {
 
-    MAN("男士"),
+    /*MAN("男士"),
     WOMAN("女士"),
     UNKNOW("未知");
 
@@ -18,5 +18,10 @@ public enum Sex {
     }
     public String getName() {
         return name;
-    }
+    }*/
+
+    String MAN = "1";
+    String WOMAN = "0";
+    String UNKNOW = "-1";
+
 }

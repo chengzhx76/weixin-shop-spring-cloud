@@ -1,7 +1,8 @@
 package com.github.chengzhx76.service.user.entity;
 
-import com.cheng.common.entity.DataEntity;
-import com.cheng.weixin.rpc.user.enumType.Sex;
+
+import com.github.chengzhx76.shop.common.entity.DataEntity;
+import com.github.chengzhx76.shop.common.entity.enums.Sex;
 
 import java.util.Date;
 

@@ -1,13 +1,13 @@
-package com.github.chengzhx76.service.user.enumType;
+package com.github.chengzhx76.service.user.entity.enumType;
 
 /**
  * Desc:
  * Author: 光灿
  * Date: 2016/11/19
  */
-public enum TXType {
+public interface TXType {
 
-    EARNING("收入"),
+    /*EARNING("收入"),
     EXPENSE("支出");
 
     private String name;
@@ -17,5 +17,9 @@ public enum TXType {
 
     public String getName() {
         return name;
-    }
+    }*/
+
+    String EARNING = "1";
+    String EXPENSE = "2";
+
 }

@@ -1,7 +1,7 @@
 package com.github.chengzhx76.service.user.entity;
 
 
-import com.github.chengzhx76.service.user.enumType.BehaviorType;
+import com.github.chengzhx76.service.user.entity.enumType.BehaviorType;
 import com.github.chengzhx76.shop.common.entity.DataEntity;
 
 /**

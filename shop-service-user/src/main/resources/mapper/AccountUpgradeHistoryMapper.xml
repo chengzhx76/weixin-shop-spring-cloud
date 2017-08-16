@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.chengzhx76.service.user.dao.AccountUpgradeHistoryDaoMapper">
+  <sql id="tableName">account_upgrade_history</sql>
+  <sql id="columns">
+    a.id,a.account_id,a.previous_levels,a.current_levels,a.previous_bonus_point,a.current_bonus_point,
+    a.remarks,a.create_date,a.update_date,a.status
+  </sql>
+  <sql id="insertColumns">
+    id,account_id,previous_levels,current_levels,previous_bonus_point,current_bonus_point,
+    remarks,create_date,update_date,status
+  </sql>
+  <sql id="accountUpgradeHistoryIf">
+    <if test="id != null and id != ''">id=#{id},</if>
+    <if test="accountId != null and accountId != ''">account_id=#{accountId},</if>
+    <if test="previousLevels != null and previousLevels != ''">previous_levels=#{previousLevels},</if>
+    <if test="currentLevels != null and currentLevels != ''">current_levels=#{currentLevels},</if>
+    <if test="previousBonusPoint != null and previousBonusPoint != ''">previous_bonus_point=#{previousBonusPoint},</if>
+    <if test="currentBonusPoint != null and currentBonusPoint != ''">current_bonus_point=#{currentBonusPoint},</if>
+
+    <if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
+    <if test="createDate != null and createDate != ''">create_date=#{createDate},</if>
+    <if test="updateDate != null and updateDate != ''">update_date=#{updateDate},</if>
+    <if test="status != null and status != ''">status=#{status}</if>
+  </sql>
+  <sql id="accountUpgradeHistorySelector">
+    select
+      <include refid="columns"/>
+    from
+      <include refid="tableName"/> AS a
+  </sql>
+
+  <sql id="accountUpgradeHistoryWhere">
+    <where>
+      <if test="id != null and id != ''">
+        id = #{id}
+      </if>
+      <choose>
+        <when test="status != null and status !=''">
+          AND status = #{status}
+        </when>
+        <otherwise>
+          AND status != 'DELETE'
+        </otherwise>
+      </choose>
+    </where>
+  </sql>
+
+  <sql id="accountUpgradeHistoryUpdate">
+    <trim prefix="SET" suffixOverrides=",">
+      <include refid="accountUpgradeHistoryIf"/>
+    </trim>
+  </sql>
+
+<!-- =================================================================== -->
+
+  <select id="load" parameterType="AccountUpgradeHistory" resultType="AccountUpgradeHistory">
+    <include refid="accountUpgradeHistorySelector"/>
+    <include refid="accountUpgradeHistoryWhere"/>
+  </select>
+
+  <!-- 获取全部 -->
+  <select id="loadAll" resultType="AccountUpgradeHistory">
+    <include refid="accountUpgradeHistorySelector"/>
+    <include refid="accountUpgradeHistoryWhere"/>
+  </select>
+
+  <!-- 更新 -->
+  <update id="update" parameterType="AccountUpgradeHistory">
+    UPDATE <include refid="tableName"/>
+    <include refid="accountUpgradeHistoryUpdate"/>
+    <include refid="accountUpgradeHistoryWhere"/>
+  </update>
+  <!-- 插入 -->
+  <insert id="save" parameterType="AccountUpgradeHistory">
+    INSERT INTO
+    <include refid="tableName"/>
+    (
+    <include refid="insertColumns"/>
+    )
+    VALUES
+    (
+    #{accountId},#{previousLevels},#{currentLevels},#{previousBonusPoint},#{currentBonusPoint},
+    #{remarks},#{createDate},#{updateDate},#{status}
+    )
+
+  </insert>
+
+</mapper>
+
