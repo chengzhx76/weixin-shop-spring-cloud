@@ -25,7 +25,7 @@ import java.util.List;
 @RestController
 public class UserServiceImpl implements UserService {
 
-    protected final Logger logger = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
     private AccountDaoMapper accountDao;
@@ -159,7 +159,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<BonusPointRecord> getByUSerIdAndCurrentMonth(String userId) {
+    public List<BonusPointRecord> getByUserIdAndCurrentMonth(String userId) {
         Date currentMonth = DateTime.now().dayOfMonth().withMinimumValue().hourOfDay().withMinimumValue().millisOfDay().withMinimumValue().toDate();
         BonusPointRecord bonusPointRecord = new BonusPointRecord();
         bonusPointRecord.setAccountId(userId);

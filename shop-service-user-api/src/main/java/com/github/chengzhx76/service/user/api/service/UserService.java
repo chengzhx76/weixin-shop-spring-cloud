@@ -2,9 +2,7 @@ package com.github.chengzhx76.service.user.api.service;
 
 
 import com.github.chengzhx76.service.user.api.entity.*;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,15 +18,15 @@ public interface UserService {
      * @param loginName
      * @return
      */
-    @GetMapping("account/login-name/{loginName}")
-    Account getAccountByLoginName(@PathVariable String loginName);
+    @GetMapping("account/login-name")
+    Account getAccountByLoginName(String loginName);
 
     /**
      * 根据ID获取帐户信息
      * @param id
      * @return
      */
-    @GetMapping("account/{id}")
+    @GetMapping("account/id")
     Account getAccountById(String id);
 
     /**
@@ -37,7 +35,8 @@ public interface UserService {
      * @param password
      * @param nickname
      */
-    void saveAccess(String phone, String password, String nickname, String ip);
+    @PostMapping("account")
+    void saveAccess(@RequestParam("phone") String phone, @RequestParam("password") String password, @RequestParam("nickname") String nickname, @RequestParam("ip") String ip);
 
     /**
      * 登陆验证
@@ -46,12 +45,14 @@ public interface UserService {
      * @param loginIp
      * @return
      */
-    String validateLogin(String username, String password, String loginIp);
+    @GetMapping("validate-login")
+    String validateLogin(@RequestParam("username") String username, @RequestParam("password") String password, @RequestParam("loginIp") String loginIp);
 
     /**
      * 获取默认的配送地址
      * @return
      */
+    @GetMapping("default-addr")
     DeliveryAddress getDefaultAddress(String userId);
     /**
      * 获取默认的配送地址
@@ -59,13 +60,15 @@ public interface UserService {
      * @param userId
      * @return
      */
-    DeliveryAddress getDeliveryAddress(String id, String userId);
+    @GetMapping("delivery-addr")
+    DeliveryAddress getDeliveryAddress(@RequestParam("id") String id, @RequestParam("userId") String userId);
 
     /**
      * 获取全部的配送信息
      * @param userId
      * @return
      */
+    @GetMapping("all-delivery-addr")
     List<DeliveryAddress> getAllDeliveryAddr(String userId);
 
     /**
@@ -73,6 +76,7 @@ public interface UserService {
      * @param userId
      * @return
      */
+    @GetMapping("account/user-id")
     Account getAccount(String userId);
 
     /**
@@ -80,24 +84,28 @@ public interface UserService {
      * @param username
      * @return
      */
+    @GetMapping("account/user-name")
     Account getAccountByUsername(String username);
 
     /**
      * 更新帐户
      * @param account
      */
+    @PutMapping("account")
     void updateAccount(Account account);
 
     /**
      * 保存动作
      * @param behavior
      */
+    @PostMapping("behavior")
     void addBehavior(Behavior behavior);
 
     /**
      * 积分记录
      * @param userId
      */
+    @GetMapping("bonus-point-record")
     BonusPointRecord getBonusPointRecord(String userId);
 
     /**
@@ -105,12 +113,14 @@ public interface UserService {
      * @param userId
      * @return
      */
-    List<BonusPointRecord> getByUSerIdAndCurrentMonth(String userId);
+    @GetMapping("bonus-point-records/user-id")
+    List<BonusPointRecord> getByUserIdAndCurrentMonth(String userId);
 
     /**
      * 保存积分
      * @param bonusPointRecord
      */
+    @PostMapping("bonus-point-record")
     void addBonusPointRecord(BonusPointRecord bonusPointRecord);
 
     /**
@@ -118,12 +128,14 @@ public interface UserService {
      * @param userId
      * @return
      */
+    @GetMapping("coupon-record/user-id")
     CouponRecord getCouponRecordByUser(String userId);
 
     /**
      * 保存券记录
      * @param couponRecor
      */
+    @PostMapping("coupon-recor")
     void addCouponRecord(CouponRecord couponRecor);
 
     /**
@@ -131,12 +143,14 @@ public interface UserService {
      * @param userId
      * @return
      */
+    @GetMapping("new-cash-record/user-id")
     CashRecord getNewCashRecord(String userId);
 
     /**
      * 保存现金记录
      * @param cashRecord
      */
+    @PostMapping("add/cash-record")
     void addCashRecord(CashRecord cashRecord);
 
     /**
@@ -144,38 +158,44 @@ public interface UserService {
      * @param userId
      * @param productId
      */
-    void addProductFocus(String userId, String productId);
+    @PostMapping("add/product-focus")
+    void addProductFocus(@RequestParam("userId") String userId, @RequestParam("productId") String productId);
     /**
      * 删除商品收藏
      * @param userId
      * @param productId
      */
-    void deleteProductFocus(String userId, String productId);
+    @PostMapping("delete/product-focus/user-id/product-id")
+    void deleteProductFocus(@RequestParam("userId") String userId, @RequestParam("productId") String productId);
     /**
      * 该商品是否收藏
      * @param userId
      * @param productId
      * @return
      */
-    boolean isProductFocus(String userId, String productId);
+    @GetMapping("is-focus/user-id/product-id")
+    boolean isProductFocus(@RequestParam("userId") String userId, @RequestParam("productId") String productId);
 
     /**
      * 获取会员信息
      * @param userId
      * @return
      */
+    @GetMapping("member/user-id")
     Member getMemberById(String userId);
     /**
      * 获取会员信息
      * @param userId
      * @return
      */
+    @GetMapping("member/account-id")
     Member getMemberByAccountId(String userId);
     /**
      * 根据ID获取级别信息
      * @param id
      * @return
      */
+    @GetMapping("account-level/id")
     AccountLevel getAccountLevelById(String id);
 
     /**
@@ -183,6 +203,7 @@ public interface UserService {
      * @param level
      * @return
      */
+    @GetMapping("account-level/level")
     AccountLevel getAccountLevelByLevel(int level);
 
 }

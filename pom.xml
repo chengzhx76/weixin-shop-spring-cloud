@@ -11,6 +11,7 @@
         <module>shop-common-entity</module>
         <module>shop-common-service</module>
         <module>shop-service-user-api</module>
+        <module>shop-consumer-test</module>
     </modules>
 
     <parent>
