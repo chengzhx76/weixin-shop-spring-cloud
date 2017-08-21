@@ -1,17 +1,17 @@
 package com.github.chengzhx76.service.user.service.impl;
 
 
+import com.github.chengzhx76.service.user.api.entity.*;
+import com.github.chengzhx76.service.user.api.entity.enumType.Credit;
+import com.github.chengzhx76.service.user.api.entity.enumType.SourceFrom;
+import com.github.chengzhx76.service.user.api.service.UserService;
 import com.github.chengzhx76.service.user.dao.*;
-import com.github.chengzhx76.service.user.entity.*;
-import com.github.chengzhx76.service.user.entity.enumType.Credit;
-import com.github.chengzhx76.service.user.entity.enumType.SourceFrom;
-import com.github.chengzhx76.service.user.service.UserService;
 import com.github.chengzhx76.shop.common.entity.enums.Sex;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -22,7 +22,7 @@ import java.util.List;
  * Author: cheng
  * Date: 2016/7/7
  */
-@Service
+@RestController
 public class UserServiceImpl implements UserService {
 
     protected final Logger logger = LoggerFactory.getLogger(getClass());

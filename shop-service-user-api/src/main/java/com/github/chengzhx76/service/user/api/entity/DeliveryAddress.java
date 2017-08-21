@@ -1,4 +1,4 @@
-package com.github.chengzhx76.service.user.entity;
+package com.github.chengzhx76.service.user.api.entity;
 
 
 import com.github.chengzhx76.shop.common.entity.DataEntity;

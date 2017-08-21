@@ -1,6 +1,6 @@
 package com.github.chengzhx76.service.user.dao;
 
-import com.github.chengzhx76.service.user.entity.AccountUpgradeHistory;
+import com.github.chengzhx76.service.user.api.entity.AccountUpgradeHistory;
 import com.github.chengzhx76.shop.common.core.dao.BaseDaoMapper;
 import org.springframework.stereotype.Repository;
 

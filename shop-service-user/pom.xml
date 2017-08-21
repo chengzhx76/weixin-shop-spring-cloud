@@ -15,11 +15,12 @@
         <!-- 公共的-->
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>shop-common-entity</artifactId>
+            <artifactId>shop-common-service</artifactId>
         </dependency>
+
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>shop-common-service</artifactId>
+            <artifactId>shop-service-user-api</artifactId>
         </dependency>
 
         <!-- Spring -->

@@ -1,4 +1,4 @@
-package com.github.chengzhx76.service.user.entity.enumType;
+package com.github.chengzhx76.service.user.api.entity.enumType;
 
 /**
  * Desc: 信用等级 划分为五个等级：良好、较好、一般、较差、差

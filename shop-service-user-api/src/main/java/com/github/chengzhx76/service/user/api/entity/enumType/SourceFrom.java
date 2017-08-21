@@ -1,4 +1,4 @@
-package com.github.chengzhx76.service.user.entity.enumType;
+package com.github.chengzhx76.service.user.api.entity.enumType;
 
 /**
  * Desc: 来源

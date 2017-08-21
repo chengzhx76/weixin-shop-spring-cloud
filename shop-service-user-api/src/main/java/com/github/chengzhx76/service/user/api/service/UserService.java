@@ -1,7 +1,10 @@
-package com.github.chengzhx76.service.user.service;
+package com.github.chengzhx76.service.user.api.service;
 
 
-import com.github.chengzhx76.service.user.entity.*;
+import com.github.chengzhx76.service.user.api.entity.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -10,19 +13,22 @@ import java.util.List;
  * Author: cheng
  * Date: 2016/7/7
  */
+@RequestMapping("/user")
 public interface UserService {
     /**
      * 根据登陆账号获取该账号信息
      * @param loginName
      * @return
      */
-    Account getAccountByLoginName(String loginName);
+    @GetMapping("account/login-name/{loginName}")
+    Account getAccountByLoginName(@PathVariable String loginName);
 
     /**
      * 根据ID获取帐户信息
      * @param id
      * @return
      */
+    @GetMapping("account/{id}")
     Account getAccountById(String id);
 
     /**

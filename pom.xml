@@ -10,6 +10,7 @@
         <module>shop-common</module>
         <module>shop-common-entity</module>
         <module>shop-common-service</module>
+        <module>shop-service-user-api</module>
     </modules>
 
     <parent>
@@ -43,6 +44,11 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>shop-common-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>shop-service-user-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!-- Spring -->
