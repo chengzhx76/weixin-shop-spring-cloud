@@ -19,7 +19,7 @@ public interface UserService {
      * @return
      */
     @GetMapping("account/login-name")
-    Account getAccountByLoginName(String loginName);
+    Account getAccountByLoginName(@RequestParam("loginName") String loginName);
 
     /**
      * 根据ID获取帐户信息
@@ -27,7 +27,7 @@ public interface UserService {
      * @return
      */
     @GetMapping("account/id")
-    Account getAccountById(String id);
+    Account getAccountById(@RequestParam("id") String id);
 
     /**
      * 保存帐号信息
@@ -53,7 +53,7 @@ public interface UserService {
      * @return
      */
     @GetMapping("default-addr")
-    DeliveryAddress getDefaultAddress(String userId);
+    DeliveryAddress getDefaultAddress(@RequestParam("userId") String userId);
     /**
      * 获取默认的配送地址
      * @param id
@@ -69,7 +69,7 @@ public interface UserService {
      * @return
      */
     @GetMapping("all-delivery-addr")
-    List<DeliveryAddress> getAllDeliveryAddr(String userId);
+    List<DeliveryAddress> getAllDeliveryAddr(@RequestParam("userId") String userId);
 
     /**
      * 获取用户账户信息
@@ -77,7 +77,7 @@ public interface UserService {
      * @return
      */
     @GetMapping("account/user-id")
-    Account getAccount(String userId);
+    Account getAccount(@RequestParam("userId") String userId);
 
     /**
      * 获取账户信息根据登录名
@@ -85,7 +85,7 @@ public interface UserService {
      * @return
      */
     @GetMapping("account/user-name")
-    Account getAccountByUsername(String username);
+    Account getAccountByUsername(@RequestParam("username") String username);
 
     /**
      * 更新帐户
@@ -106,7 +106,7 @@ public interface UserService {
      * @param userId
      */
     @GetMapping("bonus-point-record")
-    BonusPointRecord getBonusPointRecord(String userId);
+    BonusPointRecord getBonusPointRecord(@RequestParam("username") String userId);
 
     /**
      * 获取当前月获取的积分记录
@@ -114,7 +114,7 @@ public interface UserService {
      * @return
      */
     @GetMapping("bonus-point-records/user-id")
-    List<BonusPointRecord> getByUserIdAndCurrentMonth(String userId);
+    List<BonusPointRecord> getByUserIdAndCurrentMonth(@RequestParam("username") String userId);
 
     /**
      * 保存积分
@@ -129,7 +129,7 @@ public interface UserService {
      * @return
      */
     @GetMapping("coupon-record/user-id")
-    CouponRecord getCouponRecordByUser(String userId);
+    CouponRecord getCouponRecordByUser(@RequestParam("username") String userId);
 
     /**
      * 保存券记录
@@ -144,7 +144,7 @@ public interface UserService {
      * @return
      */
     @GetMapping("new-cash-record/user-id")
-    CashRecord getNewCashRecord(String userId);
+    CashRecord getNewCashRecord(@RequestParam("username") String userId);
 
     /**
      * 保存现金记录
@@ -182,21 +182,21 @@ public interface UserService {
      * @return
      */
     @GetMapping("member/user-id")
-    Member getMemberById(String userId);
+    Member getMemberById(@RequestParam("userId") String userId);
     /**
      * 获取会员信息
      * @param userId
      * @return
      */
     @GetMapping("member/account-id")
-    Member getMemberByAccountId(String userId);
+    Member getMemberByAccountId(@RequestParam("userId") String userId);
     /**
      * 根据ID获取级别信息
      * @param id
      * @return
      */
     @GetMapping("account-level/id")
-    AccountLevel getAccountLevelById(String id);
+    AccountLevel getAccountLevelById(@RequestParam("id") String id);
 
     /**
      * 根据级别获取级别信息
@@ -204,6 +204,6 @@ public interface UserService {
      * @return
      */
     @GetMapping("account-level/level")
-    AccountLevel getAccountLevelByLevel(int level);
+    AccountLevel getAccountLevelByLevel(@RequestParam("level") int level);
 
 }

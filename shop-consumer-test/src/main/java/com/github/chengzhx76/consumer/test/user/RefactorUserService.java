@@ -8,6 +8,6 @@ import org.springframework.cloud.netflix.feign.FeignClient;
  * Author: chengzhx76@qq.com
  * Date: 2017/8/21
  */
-@FeignClient("user-service")
+@FeignClient("user-service") // 填写服务提供者的applicationName
 public interface RefactorUserService extends UserService {
 }

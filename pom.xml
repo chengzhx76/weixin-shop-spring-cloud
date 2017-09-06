@@ -12,6 +12,8 @@
         <module>shop-common-service</module>
         <module>shop-service-user-api</module>
         <module>shop-consumer-test</module>
+        <module>shop-service-redis</module>
+        <module>shop-service-redis-api</module>
     </modules>
 
     <parent>
