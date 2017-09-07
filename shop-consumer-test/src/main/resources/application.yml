@@ -3,9 +3,8 @@ server:
 
 spring:
   application:
-    name: test-consumer
+    name: consumer
 
-# »’÷æ≈‰÷√
 logging:
   level:
     com.chengzhx76.gethub.client.ConsumerClient : debug

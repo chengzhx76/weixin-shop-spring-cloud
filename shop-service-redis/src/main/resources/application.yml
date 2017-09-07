@@ -1,0 +1,38 @@
+server:
+  # 端口
+  port: 8082
+
+spring:
+  application:
+    name: redis-service
+  redis:
+    # Redis数据库索引（默认为0）
+    database: 0
+    # Redis服务器地址
+    host: 115.29.47.207
+    # Redis服务器连接端口
+    port: 6677
+    # Redis服务器连接密码（默认为空）
+    password:
+    # 连接超时时间（毫秒）
+    timeout: 0
+    pool:
+      # 连接池最大连接数（使用负值表示没有限制）
+      max-active: 8
+      # 连接池最大阻塞等待时间（使用负值表示没有限制）
+      max-wait: -1
+      # 连接池中的最大空闲连接
+      max-idle: 8
+      # 连接池中的最小空闲连接
+      min-idle: 0
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka.didispace.com/eureka/
+
+# 日志
+logging:
+  level:
+    root: INFO
+

@@ -54,6 +54,11 @@
                 <artifactId>shop-service-user-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>shop-service-redis-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <!-- Spring -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
@@ -66,11 +71,6 @@
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>4.12</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-test</artifactId>
                 <scope>test</scope>
             </dependency>
             <!-- DAO相关操作 Start-->
