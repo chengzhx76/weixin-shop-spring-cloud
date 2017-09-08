@@ -17,6 +17,10 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>shop-common-service</artifactId>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>shop-common</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>${project.groupId}</groupId>

@@ -1,0 +1,18 @@
+server:
+  # 端口
+  port: 8083
+
+spring:
+    application:
+      name: cart-service
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka.didispace.com/eureka/
+
+# 日志
+logging:
+  level:
+    com.github.chengzhx76.service.user.dao: DEBUG
+
