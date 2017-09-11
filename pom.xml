@@ -16,6 +16,8 @@
         <module>shop-service-redis-api</module>
         <module>shop-service-cart-api</module>
         <module>shop-service-cart</module>
+        <module>shop-service-order-api</module>
+        <module>shop-service-order</module>
     </modules>
 
     <parent>
