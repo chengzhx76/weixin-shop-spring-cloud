@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.chengzhx76.service.order.dao.PayDaoMapper">
+  <sql id="tableName">pay</sql>
+  <sql id="columns">
+    p.id,p.name,p.pay_way,p.icon,p.order_by,p.recommend,
+    p.remarks,p.create_date,p.update_date,p.status
+  </sql>
+  <sql id="insertColumns">
+    id,name,pay_way,icon,order_by,recommend,
+    remarks,create_date,update_date,status
+  </sql>
+  <sql id="payIf">
+    <if test="id != null and id != ''">id=#{id},</if>
+    <if test="name != null and name != ''">name=#{name},</if>
+    <if test="payWay != null and payWay != ''">pay_way=#{payWay},</if>
+    <if test="icon != null and icon != ''">icon=#{icon},</if>
+    <if test="orderBy != null and orderBy != ''">order_by=#{orderBy},</if>
+    <if test="recommend != null and recommend != ''">recommend=#{recommend},</if>
+    <if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
+    <if test="createDate != null">create_date=#{createDate},</if>
+    <if test="updateDate != null">update_date=#{updateDate},</if>
+    <if test="status != null">status=#{status}</if>
+  </sql>
+  <sql id="paySelector">
+    select
+      <include refid="columns"/>
+    from
+      <include refid="tableName"/>
+    AS p
+  </sql>
+
+  <sql id="payWhere">
+    <where>
+      <if test="id != null and id != ''">
+        id = #{id}
+      </if>
+      <if test="recommend != null">
+        AND recommend = #{recommend}
+      </if>
+      <choose>
+        <when test="status != null and status !=''">
+          AND status = #{status}
+        </when>
+        <otherwise>
+          AND status != 'DELETE'
+        </otherwise>
+      </choose>
+    </where>
+    ORDER BY order_by
+  </sql>
+
+  <sql id="payUpdate">
+    <trim prefix="SET" suffixOverrides=",">
+      <include refid="payIf"/>
+    </trim>
+  </sql>
+
+<!-- =================================================================== -->
+
+  <select id="load" parameterType="pay" resultType="pay">
+    <include refid="paySelector"/>
+    <include refid="payWhere"/>
+  </select>
+
+  <!-- 获取全部 -->
+  <select id="loadAll" resultType="pay">
+    <include refid="paySelector"/>
+    <include refid="payWhere"/>
+  </select>
+
+  <!-- 更新 -->
+  <update id="update" parameterType="pay">
+    UPDATE <include refid="tableName"/>
+    <include refid="payUpdate"/>
+    <include refid="payWhere"/>
+  </update>
+  <!-- 插入 -->
+  <insert id="save" parameterType="pay">
+    INSERT INTO
+    <include refid="tableName"/>
+    (
+    <include refid="insertColumns"/>
+    )
+    VALUES
+    (
+    #{id},#{name},#{payWay},#{icon},#{orderBy},#{recommend},
+    #{remarks},#{createDate},#{updateDate},#{status}
+    )
+  </insert>
+
+</mapper>
+

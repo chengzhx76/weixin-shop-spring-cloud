@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.chengzhx76.service.order.dao.DeliveryTimeDaoMapper">
+  <sql id="tableName">delivery_time</sql>
+  <sql id="columns">
+    a.id,a.name,
+    a.remarks,a.create_date,a.update_date,a.status
+  </sql>
+  <sql id="insertColumns">
+    id,name,
+    remarks,create_date,update_date,status
+  </sql>
+  <sql id="deliveryTimeIf">
+    <if test="id != null and id != ''">id=#{id},</if>
+    <if test="name != null and name != ''">name=#{name},</if>
+    <if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
+    <if test="createDate != null and createDate != ''">create_date=#{createDate},</if>
+    <if test="updateDate != null and updateDate != ''">update_date=#{updateDate},</if>
+    <if test="status != null and status != ''">status=#{status}</if>
+  </sql>
+  <sql id="deliveryTimeSelector">
+    select
+      <include refid="columns"/>
+    from
+      <include refid="tableName"/> AS a
+  </sql>
+
+  <sql id="deliveryTimeWhere">
+    <where>
+      <if test="id != null and id != ''">
+        id = #{id}
+      </if>
+      <choose>
+        <when test="status != null and status !=''">
+          AND status = #{status}
+        </when>
+        <otherwise>
+          AND status != 'DELETE'
+        </otherwise>
+      </choose>
+    </where>
+  </sql>
+
+  <sql id="deliveryTimeUpdate">
+    <trim prefix="SET" suffixOverrides=",">
+      <include refid="deliveryTimeIf"/>
+    </trim>
+  </sql>
+
+<!-- =================================================================== -->
+
+  <select id="load" parameterType="DeliveryTime" resultType="DeliveryTime">
+    <include refid="deliveryTimeSelector"/>
+    <include refid="deliveryTimeWhere"/>
+  </select>
+
+  <!-- 获取全部 -->
+  <select id="loadAll" resultType="DeliveryTime">
+    <include refid="deliveryTimeSelector"/>
+    <include refid="deliveryTimeWhere"/>
+  </select>
+
+  <!-- 更新 -->
+  <update id="update" parameterType="DeliveryTime">
+    UPDATE <include refid="tableName"/>
+    <include refid="deliveryTimeUpdate"/>
+    <include refid="deliveryTimeWhere"/>
+  </update>
+  <!-- 插入 -->
+  <insert id="save" parameterType="DeliveryTime">
+    INSERT INTO
+    <include refid="tableName"/>
+    (
+    <include refid="insertColumns"/>
+    )
+    VALUES
+    (
+    #{id},#{name},
+    #{remarks},#{createDate},#{updateDate},#{status}
+    )
+  </insert>
+
+</mapper>
+

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.chengzhx76.service.order.dao.OrderInfoDaoMapper">
+  <sql id="tableName">order_info</sql>
+  <sql id="columns">
+    o.id,o.account_id,o.oid,o.relate_oid,o.amount_payable,o.amount_paid,o.consignee,o.mobile,o.address,o.delivery_time,o.pay,o.arayacak_address,
+    o.arayacak_delivery_time,o.province,o.city,o.country,o.village,o.order_type,o.freight_reduce,o.freight_payable,o.bonus_point_reduce_price,o.product_total_price,o.discount,
+    o.balance_offset,o.remark_customer,o.post_code,o.telephone,o.email,o.pay_time,o.pay_way,o.exchange_oid,o.coupon_code,o.coupon_reduce_price,o.flow_status,o.is_free_account_level,o.comment_id,o.since,o.order_status,
+    o.remarks,o.create_date,o.update_date,o.status
+  </sql>
+  <sql id="insertColumns">
+    id,account_id,oid,relate_oid,amount_payable,amount_paid,consignee,mobile,address,delivery_time,pay,arayacak_address,arayacak_delivery_time,
+    province,city,country,village,order_type,freight_reduce,freight_payable,product_total_price,discount,remark_customer,balance_offset,post_code,
+    telephone,email,pay_time,pay_way,exchange_oid,coupon_code,coupon_reduce_price,flow_status,bonus_point_reduce_price,is_free_account_level,comment_id,since,order_status,
+    remarks,create_date,update_date,status
+  </sql>
+  <sql id="orderInfoIf">
+    <if test="id != null and id != ''">id=#{id},</if>
+    <if test="accountId != null and accountId != ''">account_id=#{accountId},</if>
+    <if test="oid != null and oid != ''">oid=#{oid},</if>
+    <if test="relateOid != null and relateOid != ''">relate_oid=#{relateOid},</if>
+    <if test="amountPayable != null and amountPayable != ''">amount_payable=#{amountPayable},</if>
+    <if test="amountPaid != null and amountPaid != ''">amount_paid=#{amountPaid},</if>
+    <if test="consignee != null and consignee != ''">consignee=#{consignee},</if>
+    <if test="mobile != null and mobile != ''">mobile=#{mobile},</if>
+    <if test="address != null and address != ''">address=#{address},</if>
+    <if test="deliveryTime != null and deliveryTime != ''">delivery_time=#{deliveryTime},</if>
+    <if test="pay != null and pay != ''">pay=#{pay},</if>
+    <if test="arayacakAddress != null and arayacakAddress != ''">arayacak_address=#{arayacakAddress},</if>
+    <if test="arayacakDeliveryTime != null and arayacakDeliveryTime != ''">arayacak_delivery_time=#{arayacakDeliveryTime},</if>
+    <if test="province != null and province != ''">province=#{province},</if>
+    <if test="city != null and city != ''">city=#{city},</if>
+    <if test="country != null and country != ''">country=#{country},</if>
+    <if test="village != null and village != ''">village=#{village},</if>
+    <if test="orderType != null and orderType != ''">order_type=#{orderType},</if>
+    <if test="freightReduce != null and freightReduce != ''">freight_reduce=#{freightReduce},</if>
+    <if test="freightPayable != null and freightPayable != ''">freight_payable=#{freightPayable},</if>
+    <if test="productTotalPrice != null and productTotalPrice != ''">product_total_price=#{productTotalPrice},</if>
+    <if test="discount != null and discount != ''">discount=#{discount},</if>
+    <if test="balanceOffset != null and balanceOffset != ''">balance_offset=#{balanceOffset},</if>
+    <if test="remarkCustomer != null and remarkCustomer != ''">remark_customer=#{remarkCustomer},</if>
+    <if test="postCode != null and postCode != ''">post_code=#{postCode},</if>
+    <if test="telephone != null and telephone != ''">telephone=#{telephone},</if>
+    <if test="email != null and email != ''">email=#{email},</if>
+    <if test="payTime != null and payTime != ''">pay_time=#{payTime},</if>
+    <if test="payWay != null and payWay != ''">pay_way=#{payWay},</if>
+    <if test="exchangeOid != null and exchangeOid != ''">exchange_oid=#{exchangeOid},</if>
+    <if test="couponCode != null and couponCode != ''">coupon_code=#{couponCode},</if>
+    <if test="couponReducePrice != null and couponReducePrice != ''">coupon_reduce_price=#{couponReducePrice},</if>
+    <if test="flowStatus != null and flowStatus != ''">flow_status=#{flowStatus},</if>
+    <if test="bonusPointReducePrice != null and bonusPointReducePrice != ''">bonus_point_reduce_price=#{bonusPointReducePrice},</if>
+    <if test="isFreeAccountLevel != null and isFreeAccountLevel != ''">is_free_account_level=#{isFreeAccountLevel},</if>
+    <if test="commentId != null and commentId != ''">comment_Id=#{commentId},</if>
+    <if test="since != null and since != ''">since=#{since},</if>
+    <if test="orderStatus != null">order_status=#{orderStatus},</if>
+    <if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
+    <if test="createDate != null">create_date=#{createDate},</if>
+    <if test="updateDate != null">update_date=#{updateDate},</if>
+    <if test="status != null">status=#{status}</if>
+  </sql>
+  <sql id="orderInfoSelector">
+    select
+      <include refid="columns"/>
+    from
+      <include refid="tableName"/> AS o
+  </sql>
+
+  <sql id="orderInfoWhere">
+    <where>
+      <if test="id != null and id != ''">
+        id = #{id}
+      </if>
+      <if test="accountId != null and accountId != ''">
+        account_id = #{accountId}
+      </if>
+      <choose>
+        <when test="status != null and status !=''">
+          AND status = #{status}
+        </when>
+        <otherwise>
+          AND status != 'DELETE'
+        </otherwise>
+      </choose>
+    </where>
+  </sql>
+
+  <sql id="orderInfoUpdate">
+    <trim prefix="SET" suffixOverrides=",">
+      <include refid="orderInfoIf"/>
+    </trim>
+  </sql>
+
+<!-- =================================================================== -->
+
+  <select id="load" parameterType="OrderInfo" resultType="OrderInfo">
+    <include refid="orderInfoSelector"/>
+    <include refid="orderInfoWhere"/>
+  </select>
+
+  <!-- 获取全部 -->
+  <select id="loadAll" resultType="OrderInfo">
+    <include refid="orderInfoSelector"/>
+    <include refid="orderInfoWhere"/>
+  </select>
+  <!-- 获取全部 -->
+  <select id="loadByUserIdOrderByCreateDate" resultType="OrderInfo">
+    <include refid="orderInfoSelector"/>
+    <include refid="orderInfoWhere"/>
+    ORDER BY create_date DESC
+  </select>
+
+  <!-- 更新 -->
+  <update id="update" parameterType="OrderInfo">
+    UPDATE <include refid="tableName"/>
+    <include refid="orderInfoUpdate"/>
+    <include refid="orderInfoWhere"/>
+  </update>
+  <!-- 插入 -->
+  <insert id="save" parameterType="OrderInfo">
+    INSERT INTO
+    <include refid="tableName"/>
+    (
+    <include refid="insertColumns"/>
+    )
+    VALUES
+    (
+    #{id},#{accountId},#{oid},#{relateOid},#{amountPayable},#{amountPaid},#{consignee},#{mobile},#{address},#{deliveryTime},#{pay},#{arayacakAddress},#{arayacakDeliveryTime},
+    #{province},#{city},#{country},#{village},#{orderType},#{freightReduce},#{freightPayable},#{productTotalPrice},#{discount},#{remarkCustomer},#{balanceOffset},#{postCode},
+    #{telephone},#{email},#{payTime},#{payWay},#{exchangeOid},#{couponCode},#{couponReducePrice},#{flowStatus},#{bonusPointReducePrice},#{isFreeAccountLevel},#{commentId},#{since},#{orderStatus},
+    #{remarks},#{createDate},#{updateDate},#{status}
+    )
+  </insert>
+
+</mapper>
+

@@ -1,7 +1,6 @@
 package com.github.chengzhx76.service.order.api.entity;
 
 
-import com.github.chengzhx76.service.order.api.entity.enumType.PayWay;
 import com.github.chengzhx76.shop.common.entity.DataEntity;
 
 /**
@@ -13,7 +12,7 @@ public class FlowStatus extends DataEntity<FlowStatus> {
     private String name;
     private String preStatusId;
     private String nextStatusId;
-    private PayWay payWay;
+    private String payWay;
     private int orderBy;
 
     public String getName() {
@@ -40,11 +39,11 @@ public class FlowStatus extends DataEntity<FlowStatus> {
         this.nextStatusId = nextStatusId;
     }
 
-    public PayWay getPayWay() {
+    public String getPayWay() {
         return payWay;
     }
 
-    public void setPayWay(PayWay payWay) {
+    public void setPayWay(String payWay) {
         this.payWay = payWay;
     }
 

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.chengzhx76.service.order.dao.OrderProductDetailDaoMapper">
+  <sql id="tableName">order_product_detail</sql>
+  <sql id="columns">
+    o.id,order_info_id,o.oid,o.name,o.quantity,o.subtotal,o.market_price,
+    o.sale_price,o.deal_price,o.discount_rate,o.is_comment,o.is_gift,
+    o.remarks,o.create_date,o.update_date,o.status
+  </sql>
+  <sql id="insertColumns">
+    id,order_info_id,oid,name,quantity,subtotal,market_price,
+    sale_price,deal_price,discount_rate,is_comment,is_gift,
+    remarks,create_date,update_date,status
+  </sql>
+  <sql id="orderProductDetailIf">
+    <if test="id != null and id != ''">id=#{id},</if>
+    <if test="orderInfoId != null and orderInfoId != ''">order_info_id=#{orderInfoId},</if>
+    <if test="oid != null and oid != ''">oid=#{oid},</if>
+    <if test="name != null and name != ''">name=#{name},</if>
+    <if test="quantity != null and quantity != ''">quantity=#{quantity},</if>
+    <if test="subtotal != null and subtotal != ''">subtotal=#{subtotal},</if>
+    <if test="marketPrice != null and marketPrice != ''">market_price=#{marketPrice},</if>
+    <if test="salePrice != null and salePrice != ''">sale_price=#{salePrice},</if>
+    <if test="dealPrice != null and dealPrice != ''">deal_price=#{dealPrice},</if>
+    <if test="discountRate != null and discountRate != ''">discount_rate=#{discountRate},</if>
+    <if test="isComment != null and isComment != ''">is_comment=#{isComment},</if>
+    <if test="isGift != null and isGift != ''">is_gift=#{isGift},</if>
+    <if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
+    <if test="createDate != null and createDate != ''">create_date=#{createDate},</if>
+    <if test="updateDate != null and updateDate != ''">update_date=#{updateDate},</if>
+    <if test="status != null and status != ''">status=#{status}</if>
+  </sql>
+  <sql id="orderProductDetailSelector">
+    select
+      <include refid="columns"/>
+    from
+      <include refid="tableName"/> AS o
+  </sql>
+
+  <sql id="orderProductDetailWhere">
+    <where>
+      <if test="id != null and id != ''">
+        id = #{id}
+      </if>
+      <if test="orderInfoId != null and orderInfoId != ''">
+        order_info_id = #{orderInfoId}
+      </if>
+      <choose>
+        <when test="status != null and status !=''">
+          AND status = #{status}
+        </when>
+        <otherwise>
+          AND status != 'DELETE'
+        </otherwise>
+      </choose>
+    </where>
+  </sql>
+
+  <sql id="orderProductDetailUpdate">
+    <trim prefix="SET" suffixOverrides=",">
+      <include refid="orderProductDetailIf"/>
+    </trim>
+  </sql>
+
+<!-- =================================================================== -->
+
+  <select id="load" parameterType="orderProductDetail" resultType="orderProductDetail">
+    <include refid="orderProductDetailSelector"/>
+    <include refid="orderProductDetailWhere"/>
+  </select>
+
+  <!-- 获取全部 -->
+  <select id="loadAll" resultType="orderProductDetail">
+    <include refid="orderProductDetailSelector"/>
+    <include refid="orderProductDetailWhere"/>
+  </select>
+
+  <!-- 获取该订单下的商品详情 -->
+  <select id="loadByOrder" resultType="orderProductDetail">
+    <include refid="orderProductDetailSelector"/>
+    <include refid="orderProductDetailWhere"/>
+  </select>
+
+  <!-- 更新 -->
+  <update id="update" parameterType="orderProductDetail">
+    UPDATE <include refid="tableName"/>
+    <include refid="orderProductDetailUpdate"/>
+    <include refid="orderProductDetailWhere"/>
+  </update>
+  <!-- 插入 -->
+  <insert id="save" parameterType="orderProductDetail">
+    INSERT INTO
+    <include refid="tableName"/>
+    (
+    <include refid="insertColumns"/>
+    )
+    VALUES
+    (
+    #{id},#{orderInfoId},#{oid},#{name},#{quantity},#{subtotal},#{marketPrice},
+    #{salePrice},#{dealPrice},#{discountRate},#{isComment},#{isGift},
+    #{remarks},#{createDate},#{updateDate},#{status}
+    )
+  </insert>
+
+</mapper>
+

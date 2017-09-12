@@ -1,4 +1,4 @@
-package com.github.chengzhx76.service.order.api.entity.enumType;
+package com.github.chengzhx76.service.order.api.enumType;
 
 /**
  * Desc: 订单类型 正常-退货-返回换货

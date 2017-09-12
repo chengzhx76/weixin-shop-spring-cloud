@@ -2,7 +2,6 @@ package com.github.chengzhx76.service.order.api.service;
 
 
 import com.github.chengzhx76.service.order.api.entity.*;
-import com.github.chengzhx76.service.order.api.entity.enumType.PayWay;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -94,7 +93,7 @@ public interface OrderService {
      * @param payWay
      * @return
      */
-    List<FlowStatus> getFlowStatusesByPayWay(PayWay payWay);
+    List<FlowStatus> getFlowStatusesByPayWay(String payWay);
 
     /**
      * 根据ID获取订单流程名字

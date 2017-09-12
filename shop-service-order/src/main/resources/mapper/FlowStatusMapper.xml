@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.chengzhx76.service.order.dao.FlowStatusDaoMapper">
+  <sql id="tableName">flow_status</sql>
+  <sql id="columns">
+    f.id,f.name,f.pre_status_id,f.next_status_id,f.pay_way,f.order_by,
+    f.remarks,f.create_date,f.update_date,f.status
+  </sql>
+  <sql id="insertColumns">
+    id,name,pre_status_id,next_status_id,pay_way,order_by,
+    remarks,create_date,update_date,status
+  </sql>
+  <sql id="flowStatusIf">
+    <if test="id != null and id != ''">id=#{id},</if>
+    <if test="name != null and name != ''">name=#{name},</if>
+    <if test="preStatusId != null and preStatusId != ''">pre_status_id=#{preStatusId},</if>
+    <if test="nextStatusId != null and nextStatusId != ''">next_status_id=#{nextStatusId},</if>
+    <if test="payWay != null">pay_way=#{payWay},</if>
+    <if test="orderBy != null">order_by=#{orderBy},</if>
+    <if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
+    <if test="createDate != null">create_date=#{createDate},</if>
+    <if test="updateDate != null">update_date=#{updateDate},</if>
+    <if test="status != null">status=#{status}</if>
+  </sql>
+  <sql id="flowStatusSelector">
+    select
+      <include refid="columns"/>
+    from
+      <include refid="tableName"/>
+    AS f
+  </sql>
+
+  <sql id="flowStatusWhere">
+    <where>
+      <if test="id != null and id != ''">
+        id = #{id}
+      </if>
+      <if test="payWay != null">
+        pay_way = #{payWay}
+      </if>
+      <choose>
+        <when test="status != null and status !=''">
+          AND status = #{status}
+        </when>
+        <otherwise>
+          AND status != 'DELETE'
+        </otherwise>
+      </choose>
+    </where>
+    ORDER BY order_by
+  </sql>
+
+  <sql id="flowStatusUpdate">
+    <trim prefix="SET" suffixOverrides=",">
+      <include refid="flowStatusIf"/>
+    </trim>
+  </sql>
+
+<!-- =================================================================== -->
+
+  <select id="load" parameterType="FlowStatus" resultType="FlowStatus">
+    <include refid="flowStatusSelector"/>
+    <include refid="flowStatusWhere"/>
+  </select>
+
+  <!-- 获取全部 -->
+  <select id="loadAll" resultType="FlowStatus">
+    <include refid="flowStatusSelector"/>
+    <include refid="flowStatusWhere"/>
+  </select>
+
+  <!-- 更新 -->
+  <update id="update" parameterType="FlowStatus">
+    UPDATE <include refid="tableName"/>
+    <include refid="flowStatusUpdate"/>
+    <include refid="flowStatusWhere"/>
+  </update>
+  <!-- 插入 -->
+  <insert id="save" parameterType="FlowStatus">
+    INSERT INTO
+    <include refid="tableName"/>
+    (
+    <include refid="insertColumns"/>
+    )
+    VALUES
+    (
+    #{id},#{name},#{preStatusId},#{nextStatusId},#{payWay},#{orderBy},
+    #{remarks},#{createDate},#{updateDate},#{status}
+    )
+  </insert>
+
+</mapper>
+

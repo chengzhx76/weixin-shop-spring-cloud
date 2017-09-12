@@ -1,4 +1,4 @@
-package com.github.chengzhx76.service.order.api.entity.enumType;
+package com.github.chengzhx76.service.order.api.enumType;
 
 /**
  * Desc: 支付类型：在线，到付

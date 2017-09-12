@@ -1,7 +1,6 @@
 package com.github.chengzhx76.service.order.api.entity;
 
 
-import com.github.chengzhx76.service.order.api.entity.enumType.PayWay;
 import com.github.chengzhx76.shop.common.entity.DataEntity;
 
 /**
@@ -11,7 +10,7 @@ import com.github.chengzhx76.shop.common.entity.DataEntity;
  */
 public class Pay extends DataEntity<Pay> {
     private String name;
-    private PayWay payWay;
+    private String payWay;
     private String icon;
     private int orderBy;
     private Boolean recommend;
@@ -31,11 +30,11 @@ public class Pay extends DataEntity<Pay> {
         this.name = name;
     }
 
-    public PayWay getPayWay() {
+    public String getPayWay() {
         return payWay;
     }
 
-    public void setPayWay(PayWay payWay) {
+    public void setPayWay(String payWay) {
         this.payWay = payWay;
     }
 

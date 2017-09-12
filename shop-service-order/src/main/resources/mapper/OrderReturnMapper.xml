@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.chengzhx76.service.order.dao.OrderReturnDaoMapper">
+  <sql id="tableName">order_return</sql>
+  <sql id="columns">
+    o.id,o.access_id,o.return_id,o.order_info_oid,o.order_info_id,o.refund_payable,o.refund_paid,o.sale_price_tatal,o.consignee,o.mobile,
+    o.address,o.province,o.city,o.country,o.return_status_id,o.freight,o.product_total_price,o.remark_system,o.ip,o.post_code,o.telephone,
+    o.email,o.return_reason_id,o.custom_return_reason,o.refund_type_id,o.custom_price
+    o.remorks,o.creote_dote,o.updote_dote,o.stotus
+  </sql>
+  <sql id="insertColumns">
+    id,access_id,return_id,order_info_oid,order_info_id,refund_payable,refund_paid,sale_price_tatal,consignee,mobile,address,
+    province,city,country,return_status_id,freight,product_total_price,remark_system,ip,post_code,telephone,email,return_reason_id,
+    custom_return_reason,refund_type_id,custom_price
+    remarks,create_date,update_date,status
+  </sql>
+  <sql id="orderReturnIf">
+    <if test="id != null and id != ''">id=#{id},</if>
+    <if test="accountId != null and accountId != ''">account_id=#{accountId},</if>
+    <if test="returnId != null and returnId != ''">relate_oid=#{returnId},</if>
+    <if test="orderReturnOid != null and orderReturnOid != ''">order_info_oid=#{orderReturnOid},</if>
+    <if test="orderReturnId != null and orderReturnId != ''">order_info_id=#{orderReturnId},</if>
+    <if test="refundPayable != null and refundPayable != ''">refund_payable=#{refundPayable},</if>
+    <if test="refundPaid != null and refundPaid != ''">refund_paid=#{refundPaid},</if>
+    <if test="salePriceTatal != null and salePriceTatal != ''">sale_price_tatal=#{salePriceTatal},</if>
+    <if test="consignee != null and consignee != ''">consignee=#{consignee},</if>
+    <if test="mobile != null and mobile != ''">mobile=#{mobile},</if>
+    <if test="address != null and address != ''">address=#{address},</if>
+    <if test="province != null and province != ''">province=#{province},</if>
+    <if test="city != null and city != ''">city=#{city},</if>
+    <if test="country != null and country != ''">country=#{country},</if>
+    <if test="returnStatusId != null and returnStatusId != ''">return_status_id=#{returnStatusId},</if>
+    <if test="freight != null and freight != ''">freight=#{freight},</if>
+    <if test="productTotalPrice != null and productTotalPrice != ''">product_total_price=#{productTotalPrice},</if>
+    <if test="remarkSystem != null and remarkSystem != ''">remark_system=#{remarkSystem},</if>
+    <if test="ip != null and ip != ''">ip=#{ip},</if>
+    <if test="postCode != null and postCode != ''">post_code=#{postCode},</if>
+    <if test="telephone != null and telephone != ''">telephone=#{telephone},</if>
+    <if test="email != null and email != ''">email=#{email},</if>
+    <if test="returnReasonId != null and returnReasonId != ''">return_reason_id=#{returnReasonId},</if>
+    <if test="customReturnReason != null and customReturnReason != ''">custom_return_reason=#{customReturnReason},</if>
+    <if test="refundTypeId != null and refundTypeId != ''">refund_type_id=#{refundTypeId},</if>
+    <if test="customPrice != null and customPrice != ''">custom_price=#{customPrice},</if>
+    <if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
+    <if test="createDate != null and createDate != ''">create_date=#{createDate},</if>
+    <if test="updateDate != null and updateDate != ''">update_date=#{updateDate},</if>
+    <if test="status != null and status != ''">status=#{status}</if>
+  </sql>
+  <sql id="orderReturnSelector">
+    select
+      <include refid="columns"/>
+    from
+      <include refid="tableName"/> AS a
+  </sql>
+
+  <sql id="orderReturnWhere">
+    <where>
+      <if test="id != null and id != ''">
+        id = #{id}
+      </if>
+      <choose>
+        <when test="status != null and status !=''">
+          AND status = #{status}
+        </when>
+        <otherwise>
+          AND status != 'DELETE'
+        </otherwise>
+      </choose>
+    </where>
+  </sql>
+
+  <sql id="orderReturnUpdate">
+    <trim prefix="SET" suffixOverrides=",">
+      <include refid="orderReturnIf"/>
+    </trim>
+  </sql>
+
+<!-- =================================================================== -->
+
+  <select id="load" parameterType="orderReturn" resultType="orderReturn">
+    <include refid="orderReturnSelector"/>
+    <include refid="orderReturnWhere"/>
+  </select>
+
+  <!-- 获取全部 -->
+  <select id="loadAll" resultType="orderReturn">
+    <include refid="orderReturnSelector"/>
+    <include refid="orderReturnWhere"/>
+  </select>
+
+  <!-- 更新 -->
+  <update id="update" parameterType="orderReturn">
+    UPDATE <include refid="tableName"/>
+    <include refid="orderReturnUpdate"/>
+    <include refid="orderReturnWhere"/>
+  </update>
+  <!-- 插入 -->
+  <insert id="save" parameterType="orderReturn">
+    INSERT INTO
+    <include refid="tableName"/>
+    (
+    <include refid="insertColumns"/>
+    )
+    VALUES
+    (
+    #{id},#{access_id},#{return_id},#{order_info_oid},#{order_info_id},#{refund_payable},#{refund_paid},#{sale_price_tatal},
+    #{consignee},#{mobile},#{address},#{province},#{city},#{country},#{return_status_id},#{freight},#{product_total_price},
+    #{remark_system},#{ip},#{post_code},#{telephone},#{email},#{return_reason_id},#{custom_return_reason},#{refund_type_id},#{custom_price},
+    #{remarks},#{createDate},#{updateDate},#{status}
+    )
+  </insert>
+
+</mapper>
+

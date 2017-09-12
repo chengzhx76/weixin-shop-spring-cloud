@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.chengzhx76.service.order.dao.orderReturnDetailDetailDaoMapper">
+  <sql id="tableName">order_return_detail</sql>
+  <sql id="columns">
+    o.id,o.return_oid,o.no,o.name,o.quantity,o.subtatal,o.market_price,o.sale_price,o.deal_price,o.discount_rate,o.is_gift,
+    o.remorks,o.creote_dote,o.updote_dote,o.stotus
+  </sql>
+  <sql id="insertColumns">
+    id,return_oid,no,name,quantity,subtatal,market_price,sale_price,deal_price,discount_rate,is_gift,
+    remarks,create_date,update_date,status
+  </sql>
+  <sql id="orderReturnDetailIf">
+    <if test="id != null and id != ''">id=#{id},</if>
+    <if test="returnOid != null and returnOid != ''">return_oid=#{returnOid},</if>
+    <if test="no != null and no != ''">no=#{no},</if>
+    <if test="name != null and name != ''">name=#{name},</if>
+    <if test="quantity != null and quantity != ''">quantity=#{quantity},</if>
+    <if test="subtatal != null and subtatal != ''">subtatal=#{subtatal},</if>
+    <if test="marketPrice != null and marketPrice != ''">market_price=#{marketPrice},</if>
+    <if test="salePrice != null and salePrice != ''">sale_price=#{salePrice},</if>
+    <if test="dealPrice != null and dealPrice != ''">deal_price=#{dealPrice},</if>
+    <if test="discountRate != null and discountRate != ''">discount_rate=#{discountRate},</if>
+    <if test="isGift != null and isGift != ''">is_gift=#{isGift},</if>
+    <if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
+    <if test="createDate != null and createDate != ''">create_date=#{createDate},</if>
+    <if test="updateDate != null and updateDate != ''">update_date=#{updateDate},</if>
+    <if test="status != null and status != ''">status=#{status}</if>
+  </sql>
+  <sql id="orderReturnDetailSelector">
+    select
+      <include refid="columns"/>
+    from
+      <include refid="tableName"/> AS a
+  </sql>
+
+  <sql id="orderReturnDetailWhere">
+    <where>
+      <if test="id != null and id != ''">
+        id = #{id}
+      </if>
+      <choose>
+        <when test="status != null and status !=''">
+          AND status = #{status}
+        </when>
+        <otherwise>
+          AND status != 'DELETE'
+        </otherwise>
+      </choose>
+    </where>
+  </sql>
+
+  <sql id="orderReturnDetailUpdate">
+    <trim prefix="SET" suffixOverrides=",">
+      <include refid="orderReturnDetailIf"/>
+    </trim>
+  </sql>
+
+<!-- =================================================================== -->
+
+  <select id="load" parameterType="orderReturnDetail" resultType="orderReturnDetail">
+    <include refid="orderReturnDetailSelector"/>
+    <include refid="orderReturnDetailWhere"/>
+  </select>
+
+  <!-- 获取全部 -->
+  <select id="loadAll" resultType="orderReturnDetail">
+    <include refid="orderReturnDetailSelector"/>
+    <include refid="orderReturnDetailWhere"/>
+  </select>
+
+  <!-- 更新 -->
+  <update id="update" parameterType="orderReturnDetail">
+    UPDATE <include refid="tableName"/>
+    <include refid="orderReturnDetailUpdate"/>
+    <include refid="orderReturnDetailWhere"/>
+  </update>
+  <!-- 插入 -->
+  <insert id="save" parameterType="orderReturnDetail">
+    INSERT INTO
+    <include refid="tableName"/>
+    (
+    <include refid="insertColumns"/>
+    )
+    VALUES
+    (
+    #{id},#{return_oid},#{no},#{name},#{quantity},#{subtatal},#{market_price},#{sale_price},#{deal_price},#{discount_rate},#{is_gift},
+    #{remarks},#{createDate},#{updateDate},#{status}
+    )
+  </insert>
+
+</mapper>
+

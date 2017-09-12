@@ -68,6 +68,11 @@
                 <artifactId>shop-service-cart-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>shop-service-order-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <!-- Spring -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>

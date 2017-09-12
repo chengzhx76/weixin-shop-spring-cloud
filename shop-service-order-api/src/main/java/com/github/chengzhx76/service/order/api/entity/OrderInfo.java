@@ -1,9 +1,6 @@
 package com.github.chengzhx76.service.order.api.entity;
 
 
-import com.github.chengzhx76.service.order.api.entity.enumType.OrderStatus;
-import com.github.chengzhx76.service.order.api.entity.enumType.OrderType;
-import com.github.chengzhx76.service.order.api.entity.enumType.PayWay;
 import com.github.chengzhx76.shop.common.entity.DataEntity;
 
 import java.math.BigDecimal;
@@ -34,9 +31,9 @@ public class OrderInfo extends DataEntity<OrderInfo> {
     private String village;
     private String ip;
 
-    private PayWay payWay;
+    private String payWay;
     private String flowStatus;
-    private OrderType orderType;
+    private String orderType;
     private BigDecimal freightReduce;
     private BigDecimal freightPayable;
     private BigDecimal productTotalPrice;
@@ -57,7 +54,7 @@ public class OrderInfo extends DataEntity<OrderInfo> {
     private String commentId;
     private Boolean since; // 是否是自提
 
-    private OrderStatus orderStatus;
+    private String orderStatus;
 
 
     public OrderInfo() {
@@ -222,11 +219,11 @@ public class OrderInfo extends DataEntity<OrderInfo> {
         this.country = country;
     }
 
-    public PayWay getPayWay() {
+    public String getPayWay() {
         return payWay;
     }
 
-    public void setPayWay(PayWay payWay) {
+    public void setPayWay(String payWay) {
         this.payWay = payWay;
     }
 
@@ -238,11 +235,11 @@ public class OrderInfo extends DataEntity<OrderInfo> {
         this.balanceOffset = balanceOffset;
     }
 
-    public OrderType getOrderType() {
+    public String getOrderType() {
         return orderType;
     }
 
-    public void setOrderType(OrderType orderType) {
+    public void setOrderType(String orderType) {
         this.orderType = orderType;
     }
 
@@ -390,11 +387,11 @@ public class OrderInfo extends DataEntity<OrderInfo> {
         this.since = since;
     }
 
-    public OrderStatus getOrderStatus() {
+    public String getOrderStatus() {
         return orderStatus;
     }
 
-    public void setOrderStatus(OrderStatus orderStatus) {
+    public void setOrderStatus(String orderStatus) {
         this.orderStatus = orderStatus;
     }
 }
