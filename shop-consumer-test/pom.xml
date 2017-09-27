@@ -18,7 +18,7 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>shop-service-redis-api</artifactId>
+            <artifactId>shop-service-cart-api</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>

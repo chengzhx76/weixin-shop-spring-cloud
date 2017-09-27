@@ -1,10 +1,10 @@
 package com.github.chengzhx76.service.cart.service.impl;
 
-import com.github.chengzhx76.service.cart.refactor.RefactorRedisService;
 import com.github.chengzhx76.service.cart.service.api.entity.CartInfo;
 import com.github.chengzhx76.service.cart.service.api.entity.ShoppingCart;
 import com.github.chengzhx76.service.cart.service.api.model.ProductModel;
 import com.github.chengzhx76.service.cart.service.api.service.CartService;
+import com.github.chengzhx76.service.redis.RedisService;
 import com.github.chengzhx76.shop.common.constant.Constant;
 import com.github.chengzhx76.shop.common.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ import java.util.*;
 public class CartServiceImpl implements CartService {
 
     @Autowired
-    private RefactorRedisService redisService;
+    private RedisService redisService;
 
     @Override
     public Long addProductCount(String userId, String productId) {
@@ -35,7 +35,6 @@ public class CartServiceImpl implements CartService {
         changeChooseStatus(userId, productId);
         return redisService.decrease(getCart(userId), getProductFlag(userId, productId));
     }
-
 
     @Override
     public Set<String> getAllProductIds(String userId) {

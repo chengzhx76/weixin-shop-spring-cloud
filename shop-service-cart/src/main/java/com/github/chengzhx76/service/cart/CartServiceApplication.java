@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
  * Desc:
@@ -15,7 +16,7 @@ import org.springframework.cloud.netflix.feign.EnableFeignClients;
 @EnableFeignClients
 @EnableDiscoveryClient
 @SpringBootApplication
-//@ComponentScan("com.github.chengzhx76.service.cart.refactor")
+@ComponentScan("com.github.chengzhx76.service")
 @EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
 public class CartServiceApplication {
 

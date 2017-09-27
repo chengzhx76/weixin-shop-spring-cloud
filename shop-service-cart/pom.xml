@@ -24,7 +24,7 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>shop-service-redis-api</artifactId>
+            <artifactId>shop-common-redis</artifactId>
         </dependency>
 
         <!-- Spring -->

@@ -12,12 +12,13 @@
         <module>shop-common-service</module>
         <module>shop-service-user-api</module>
         <module>shop-consumer-test</module>
-        <module>shop-service-redis</module>
-        <module>shop-service-redis-api</module>
         <module>shop-service-cart-api</module>
         <module>shop-service-cart</module>
         <module>shop-service-order-api</module>
         <module>shop-service-order</module>
+        <module>shop-service-system-api</module>
+        <module>shop-service-system</module>
+        <module>shop-common-redis</module>
     </modules>
 
     <parent>
@@ -32,7 +33,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>1.8</java.version>
+        <java.version>1.7</java.version>
     </properties>
 
     <dependencyManagement>
@@ -60,7 +61,7 @@
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>shop-service-redis-api</artifactId>
+                <artifactId>shop-common-redis</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -73,6 +74,18 @@
                 <artifactId>shop-service-order-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>shop-service-system-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-redis</artifactId>
+                <version>1.4.3.RELEASE</version>
+            </dependency>
+
             <!-- Spring -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
