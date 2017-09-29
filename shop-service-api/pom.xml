@@ -12,6 +12,7 @@
   <artifactId>shop-service-api</artifactId>
   <packaging>pom</packaging>
   <modules>
+    <module>shop-common-entity</module>
     <module>shop-service-user-api</module>
     <module>shop-service-cart-api</module>
     <module>shop-service-order-api</module>
@@ -20,7 +21,15 @@
     <module>shop-service-promotion-api</module>
     <module>shop-service-product-api</module>
     <module>shop-service-message-api</module>
+    <module>shop-service-test-api</module>
   </modules>
 
+  <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>shop-common-entity</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
 
 </project>
