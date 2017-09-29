@@ -5,6 +5,7 @@ import com.github.chengzhx76.service.promotion.api.entity.CouponCode;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ public interface CouponService {
      * @return
      */
     @GetMapping("user-id")
-    List<CouponCode> getCouponCodeByUser(String userId);
+    List<CouponCode> getCouponCodeByUser(@RequestParam("userId") String userId);
 
     /**
      * 获取优惠券信息
@@ -29,12 +30,12 @@ public interface CouponService {
      * @return
      */
     @GetMapping("id")
-    CouponCode getCouponById(String id);
+    CouponCode getCouponById(@RequestParam("id") String id);
 
     /**
      * 更新优惠券信息
      * @param id
      */
     @PutMapping("id")
-    void updateCouponUsedById(String id);
+    void updateCouponUsedById(@RequestParam("id") String id);
 }

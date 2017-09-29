@@ -16,6 +16,8 @@ weixin-shop-spring-cloud
 ├─shop-service-comment-api      // 评论模块暴露的接口
 ├─shop-service-order            // 订单模块
 ├─shop-service-order-api        // 订单模块暴露的接口
+├─shop-service-product          // 商品模块
+├─shop-service-product-api      // 商品模块暴露的接口
 ├─shop-service-promotion        // 促销模块
 ├─shop-service-promotion-api    // 促销模块暴露的接口
 ├─shop-service-system           // 系统模块

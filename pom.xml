@@ -23,6 +23,8 @@
         <module>shop-service-comment-api</module>
         <module>shop-service-promotion</module>
         <module>shop-service-promotion-api</module>
+        <module>shop-service-product</module>
+        <module>shop-service-product-api</module>
     </modules>
 
     <parent>
@@ -91,6 +93,11 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>shop-service-promotion-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>shop-service-product-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

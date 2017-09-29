@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cheng.weixin.service.item.dao.ProductTypeDaoMapper">
+  <sql id="tableName">product_type</sql>
+  <sql id="columns">
+    p.id,p.name,p.remarks,p.create_date,p.update_date,p.status
+  </sql>
+  <sql id="insertColumns">
+    id,name,remarks,create_date,update_date,status
+  </sql>
+  <sql id="productTypeIf">
+    <if test="id != null and id != ''">id=#{id},</if>
+    <if test="name != null and name != ''">name=#{name},</if>
+    <if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
+    <if test="createDate != null and createDate != ''">create_date=#{createDate},</if>
+    <if test="updateDate != null and updateDate != ''">update_date=#{updateDate},</if>
+    <if test="status != null and status != ''">status=#{status}</if>
+  </sql>
+  <sql id="productTypeSelector">
+    select
+      <include refid="columns"/>
+    from
+      <include refid="tableName"/> AS p
+  </sql>
+
+  <sql id="productTypeWhere">
+    <where>
+      <if test="id != null and id != ''">
+        id = #{id}
+      </if>
+      <choose>
+        <when test="status != null and status !=''">
+          AND status = #{status}
+        </when>
+        <otherwise>
+          AND status != 'DELETE'
+        </otherwise>
+      </choose>
+    </where>
+  </sql>
+
+  <sql id="productTypeUpdate">
+    <trim prefix="SET" suffixOverrides=",">
+      <include refid="productTypeIf"/>
+    </trim>
+  </sql>
+
+<!-- =================================================================== -->
+
+  <!-- 根据商品ID -->
+  <select id="load" parameterType="ProductType" resultType="ProductType">
+    <include refid="productTypeSelector"/>
+    <include refid="productTypeWhere"/>
+  </select>
+  <!-- 获取全部信息 -->
+  <select id="loadAll" resultType="ProductType">
+    <include refid="productTypeSelector"/>
+    <include refid="productTypeWhere"/>
+  </select>
+
+  <!-- 更新 -->
+  <update id="update" parameterType="ProductType">
+    UPDATE <include refid="tableName"/>
+    <include refid="productTypeUpdate"/>
+    <include refid="productTypeWhere"/>
+  </update>
+  <!-- 插入 -->
+  <insert id="save" parameterType="ProductType">
+    INSERT INTO
+    <include refid="tableName"/>
+    (
+    <include refid="insertColumns"/>
+    )
+    VALUES
+    <include refid="productTypeIf"/>
+  </insert>
+</mapper>
+

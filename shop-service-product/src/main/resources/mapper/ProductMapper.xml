@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cheng.weixin.service.item.dao.ProductDaoMapper">
+  <sql id="tableName">product</sql>
+  <sql id="columns">
+    p.id,p.name,p.market_price,p.sale_price,p.no,p.key_words,p.type_id,p.is_alive,p.is_index,
+    p.tag,p.unit_desc,p.units_in_stock,p.modify_admin_id,p.give_away,p.remarks,p.create_date,p.update_date,p.status
+  </sql>
+  <sql id="insertColumns">
+    id,name,market_price,sale_price,no,key_words,type_id,is_alive,is_index,
+    tag,unit_desc,units_in_stock,modify_admin_id,give_away,remarks,create_date,update_date,status
+  </sql>
+  <sql id="productIf">
+    <if test="id != null and id != ''">id=#{id},</if>
+    <if test="name != null and name != ''">name=#{name},</if>
+    <if test="marketPrice != null and marketPrice != ''">market_price=#{marketPrice},</if>
+    <if test="salePrice != null and salePrice != ''">sale_price=#{salePrice},</if>
+    <if test="no != null and no != ''">no=#{no},</if>
+    <if test="keywords != null and keywords != ''">key_words=#{keywords},</if>
+    <if test="typeId != null and typeId != ''">type_id=#{typeId},</if>
+    <if test="isAlive != null and isAlive != ''">is_alive=#{isAlive},</if>
+    <if test="isIndex != null and isIndex != ''">is_index=#{isIndex},</if>
+    <if test="tag != null and tag != ''">tag=#{tag},</if>
+    <if test="unitDesc != null and unitDesc != ''">unit_desc=#{unitDesc},</if>
+    <if test="unitsInStock != null">units_in_stock=#{unitsInStock},</if>
+    <if test="modifyAdminId != null and modifyAdminId != ''">modify_admin_id=#{modifyAdminId},</if>
+    <if test="giveAway != null and giveAway != ''">give_away=#{giveAway},</if>
+    <if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
+    <if test="createDate != null and createDate != ''">create_date=#{createDate},</if>
+    <if test="updateDate != null and updateDate != ''">update_date=#{updateDate},</if>
+    <if test="status != null and status != ''">status=#{status}</if>
+  </sql>
+  <sql id="productSelector">
+    select
+      <include refid="columns"/>
+    from
+      <include refid="tableName"/> AS p
+  </sql>
+
+  <sql id="productWhere">
+    <where>
+      <if test="id != null and id != ''">
+        id = #{id}
+      </if>
+      <if test="isIndex != null and isIndex != ''">
+        is_index = #{isIndex}
+      </if>
+      <if test="typeId != null and typeId != ''">
+        type_id = #{typeId}
+      </if>
+      <choose>
+        <when test="status != null and status !=''">
+          AND status = #{status}
+        </when>
+        <otherwise>
+          AND status != 'DELETE'
+        </otherwise>
+      </choose>
+    </where>
+  </sql>
+
+  <sql id="productWhereUpdate">
+    <where>
+      <if test="id != null and id != ''">
+        id = #{id}
+      </if>
+    </where>
+  </sql>
+
+  <sql id="productUpdate">
+    <trim prefix="SET" suffixOverrides=",">
+      <include refid="productIf"/>
+    </trim>
+  </sql>
+
+<!-- =================================================================== -->
+
+  <!-- 根据商品ID -->
+  <select id="load" parameterType="Product" resultType="Product">
+    <include refid="productSelector"/>
+    <include refid="productWhere"/>
+  </select>
+  <!-- 获取全部信息 -->
+  <select id="loadAll" parameterType="Product" resultType="Product">
+    <include refid="productSelector"/>
+    <include refid="productWhere"/>
+  </select>
+
+  <!-- 更新 -->
+  <update id="update" parameterType="Product">
+    UPDATE <include refid="tableName"/>
+    <include refid="productUpdate"/>
+    <include refid="productWhereUpdate"/>
+  </update>
+  <!-- 插入 -->
+  <insert id="save" parameterType="Product">
+    INSERT INTO
+    <include refid="tableName"/>
+    (
+    <include refid="insertColumns"/>
+    )
+    VALUES
+    <include refid="productIf"/>
+  </insert>
+
+  <!-- ======================================== -->
+<!--  &lt;!&ndash; 获取首页的商品 &ndash;&gt;
+  <select id="loadIndex" parameterType="Product" resultType="Product">
+    <include refid="productSelector"/>
+    <include refid="productWhere"/>
+  </select>
+  &lt;!&ndash; 根据ID获取商品 &ndash;&gt;
+  <select id="loadMallByTypeId" parameterType="Product" resultType="Product">
+    <include refid="productSelector"/>
+    <include refid="productWhere"/>
+  </select>-->
+</mapper>
+

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cheng.weixin.service.item.dao.PictureDaoMapper">
+  <sql id="tableName">picture</sql>
+  <sql id="columns">
+    p.id,p.product_id,p.picture_url,p.width,p.height,p.is_default,
+    p.remarks,p.create_date,p.update_date,p.status
+  </sql>
+  <sql id="insertColumns">
+    id,product_id,picture_url,width,height,is_default,
+    remarks,create_date,update_date,status
+  </sql>
+  <sql id="pictureIf">
+    <if test="id != null and id != ''">id=#{id},</if>
+    <if test="productId != null and productId != ''">product_id=#{productId},</if>
+    <if test="pictureUrl != null and pictureUrl != ''">picture_url=#{pictureUrl},</if>
+    <if test="isDefault != null and isDefault != ''">is_default=#{isDefault},</if>
+    <if test="width != null and width != ''">width=#{width},</if>
+    <if test="height != null and height != ''">height=#{height},</if>
+    <if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
+    <if test="createDate != null and createDate != ''">create_date=#{createDate},</if>
+    <if test="updateDate != null and updateDate != ''">update_date=#{updateDate},</if>
+    <if test="status != null and status != ''">status=#{status}</if>
+  </sql>
+  <sql id="pictureSelector">
+    select
+      <include refid="columns"/>
+    from
+      <include refid="tableName"/> AS p
+  </sql>
+
+  <sql id="pictureWhere">
+    <where>
+      <if test="id != null and id != ''">
+        id = #{id}
+      </if>
+      <if test="productId != null and productId != ''">
+        AND product_id = #{productId}
+      </if>
+      <if test="isDefault != null">
+        AND is_default = #{isDefault}
+      </if>
+      <choose>
+        <when test="status != null and status !=''">
+          AND status = #{status}
+        </when>
+        <otherwise>
+          AND status != 'DELETE'
+        </otherwise>
+      </choose>
+    </where>
+  </sql>
+
+  <sql id="pictureUpdate">
+    <trim prefix="SET" suffixOverrides=",">
+      <include refid="pictureIf"/>
+    </trim>
+  </sql>
+
+<!-- =================================================================== -->
+
+  <!-- 根据ID获取图片 -->
+  <select id="load" parameterType="Picture" resultType="Picture">
+    <include refid="pictureSelector"/>
+    <include refid="pictureWhere"/>
+  </select>
+  <!-- 获取全部图片信息 -->
+  <select id="loadAll" parameterType="Picture" resultType="Picture">
+    <include refid="pictureSelector"/>
+    <include refid="pictureWhere"/>
+  </select>
+
+  <!-- 更新 -->
+  <update id="update" parameterType="Picture">
+    UPDATE <include refid="tableName"/>
+    <include refid="pictureUpdate"/>
+    <include refid="pictureWhere"/>
+  </update>
+  <!-- 插入 -->
+  <insert id="save" parameterType="Picture">
+    INSERT INTO
+    <include refid="tableName"/>
+    (
+    <include refid="insertColumns"/>
+    )
+    VALUES
+    <include refid="pictureIf"/>
+  </insert>
+
+  <!-- =================================================================== -->
+  <!-- 根据商品ID获取所有的图片 -->
+<!--  <select id="loadAllPicture" parameterType="Picture" resultType="Picture">
+    <include refid="pictureSelector"/>
+    <include refid="pictureWhere"/>
+  </select>
+  &lt;!&ndash; 根据商品ID获取默认的图片 &ndash;&gt;
+  <select id="loadDefaultPicture" parameterType="Picture" resultType="Picture">
+    <include refid="pictureSelector"/>
+    <include refid="pictureWhere"/>
+    AND is_default = 1
+  </select>-->
+</mapper>
+
