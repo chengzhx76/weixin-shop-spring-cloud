@@ -54,5 +54,5 @@ pagehelper:
 # 日志
 logging:
   level:
-    com.github.chengzhx76.service.user.dao: DEBUG
+    com.github.chengzhx76.service.system.dao: DEBUG
 

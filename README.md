@@ -3,9 +3,9 @@
 基于原来[Dubbo](https://github.com/chengzhx76/Weixin-Dubbo)项目改造成SpringCloud项目，欢迎Star
 
 ```
- weixin-shop-spring-cloud
+weixin-shop-spring-cloud
 ├─shop-common                   // 抽取的公共模块
-├─shop-common-config
+├─shop-common-config            // 暂时没用，以后考虑用springCloud-config实现
 ├─shop-common-entity            // 基础实体类
 ├─shop-common-redis             // Redis基础模块
 ├─shop-common-service           // service、Dao基础模块
