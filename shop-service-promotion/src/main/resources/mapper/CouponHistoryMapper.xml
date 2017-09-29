@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.chengzhx76.service.promotion.dao.CouponHistoryDaoMapper">
+  <sql id="tableName">coupon_history</sql>
+  <sql id="columns">
+    c.id,code,c.tx_behavior,c.account_id,c.is_send_used,
+    c.remarks,c.create_date,c.update_date,c.status
+  </sql>
+  <sql id="insertColumns">
+    id,code,tx_behavior,account_id,is_send_used,
+    remarks,create_date,update_date,status
+  </sql>
+  <sql id="couponHistoryIf">
+    <if test="id != null and id != ''">id=#{id},</if>
+    <if test="code != null and code != ''">code=#{code},</if>
+    <if test="txBehavior != null and txBehavior != ''">tx_behavior=#{txBehavior},</if>
+    <if test="accountId != null and accountId != ''">account_id=#{accountId},</if>
+    <if test="isSendUsed != null and isSendUsed != ''">is_send_used=#{isSendUsed},</if>
+    <if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
+    <if test="createDate != null">create_date=#{createDate},</if>
+    <if test="updateDate != null">update_date=#{updateDate},</if>
+    <if test="status != null">status=#{status}</if>
+  </sql>
+  <sql id="couponHistorySelector">
+    select
+      <include refid="columns"/>
+    from
+      <include refid="tableName"/>
+    AS c
+  </sql>
+
+  <sql id="couponHistoryWhere">
+    <where>
+      <if test="id != null and id != ''">
+        id = #{id}
+      </if>
+      <choose>
+        <when test="status != null">
+          AND status = #{status}
+        </when>
+        <otherwise>
+          AND status != 'DELETE'
+        </otherwise>
+      </choose>
+    </where>
+  </sql>
+
+  <sql id="couponHistoryUpdate">
+    <trim prefix="SET" suffixOverrides=",">
+      <include refid="couponHistoryIf"/>
+    </trim>
+  </sql>
+
+<!-- =================================================================== -->
+
+  <select id="load" parameterType="couponHistory" resultType="couponHistory">
+    <include refid="couponHistorySelector"/>
+    <include refid="couponHistoryWhere"/>
+  </select>
+
+  <!-- 获取全部 -->
+  <select id="loadAll" resultType="couponHistory">
+    <include refid="couponHistorySelector"/>
+    <include refid="couponHistoryWhere"/>
+  </select>
+
+  <!-- 更新 -->
+  <update id="update" parameterType="couponHistory">
+    UPDATE <include refid="tableName"/>
+    <include refid="couponHistoryUpdate"/>
+    <include refid="couponHistoryWhere"/>
+  </update>
+  <!-- 插入 -->
+  <insert id="save" parameterType="couponHistory">
+    INSERT INTO
+    <include refid="tableName"/>
+    (
+    <include refid="insertColumns"/>
+    )
+    VALUES
+    (
+    #{id},#{code},#{txBehavior},#{accountId},#{isSendUsed},
+    #{remarks},#{createDate},#{updateDate},#{status}
+    )
+  </insert>
+
+</mapper>
+

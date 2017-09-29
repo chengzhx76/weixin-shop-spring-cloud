@@ -21,6 +21,8 @@
         <module>shop-common-redis</module>
         <module>shop-service-comment</module>
         <module>shop-service-comment-api</module>
+        <module>shop-service-promotion</module>
+        <module>shop-service-promotion-api</module>
     </modules>
 
     <parent>
@@ -86,7 +88,11 @@
                 <artifactId>shop-service-comment-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>shop-service-promotion-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-redis</artifactId>

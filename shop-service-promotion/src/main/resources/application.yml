@@ -1,0 +1,58 @@
+server:
+  # 端口
+  port: 8092
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka.didispace.com/eureka/
+
+spring:
+  application:
+    name: promotion-service
+  datasource:
+    name: service-promotion
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/wx-shop
+    username: root
+    password: root
+    # 使用druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      # 连接池最大使用连接数
+      max-active: 20
+      # 初始化连接大小
+      initial-size: 1
+      # 获取连接最大等待时间
+      max-wait: 60000
+      # 连接池最小空闲
+      min-idle: 3
+      # 自动清除无用连接
+      remove-abandoned: true
+      # 清除无用连接的等待时间
+      remove-abandoned-timeout: 180
+      # 连接属性
+      connection-properties: clientEncoding=UTF-8
+
+# mybatis配置
+mybatis:
+  type-aliases-package: com.github.chengzhx76.service.promotion.api.entity
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    database-id: service-promotion
+    # 开启字段名和属性名驼峰匹配
+    map-underscore-to-camel-case: true
+    # 全局启用或禁用延迟加载。当禁用时，所有关联对象都会即时加载
+    lazy-loading-enabled: true
+    # 当启用时，有延迟加载属性的对象在被调用时将会完全加载任意属性。否则，每种属性将会按需要加载
+    aggressive-lazy-loading: true
+
+# 分页插件配置
+pagehelper:
+  helperDialect: mysql
+
+# 日志
+logging:
+  level:
+    com.github.chengzhx76.service.promotion.dao: DEBUG
+

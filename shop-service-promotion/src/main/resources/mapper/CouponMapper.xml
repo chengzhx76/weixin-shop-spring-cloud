@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.chengzhx76.service.promotion.dao.CouponDaoMapper">
+  <sql id="tableName">coupon</sql>
+  <sql id="columns">
+    c.id,name,c.type,c.face_value,c.delay_day,c.is_free,c.is_reuse,
+    c.enough_money,c.discount,c.include_group,c.exclude_group,c.begin_time,c.end_time,
+    c.remarks,c.create_date,c.update_date,c.status
+  </sql>
+  <sql id="insertColumns">
+    id,name,type,face_value,delay_day,is_free,is_reuse,
+    enough_money,discount,include_group,exclude_group,begin_time,end_time
+    remarks,create_date,update_date,status
+  </sql>
+  <sql id="couponIf">
+    <if test="id != null and id != ''">id=#{id},</if>
+    <if test="name != null and name != ''">name=#{name},</if>
+    <if test="type != null">type=#{type},</if>
+    <if test="faceValue != null and faceValue != ''">face_value=#{faceValue},</if>
+    <if test="delayDay != null and delayDay != ''">delay_day=#{delayDay},</if>
+    <if test="isFree != null and isFree != ''">is_free=#{isFree},</if>
+    <if test="isReuse != null and isReuse != ''">is_reuse=#{isReuse},</if>
+    <if test="enoughMoney != null and enoughMoney != ''">enough_money=#{enoughMoney},</if>
+    <if test="discount != null and discount != ''">discount=#{discount},</if>
+    <if test="includeGroup != null and includeGroup != ''">include_group=#{includeGroup},</if>
+    <if test="excludeGroup != null and excludeGroup != ''">exclude_group=#{excludeGroup},</if>
+    <if test="beginTime != null and beginTime != ''">begin_time=#{beginTime},</if>
+    <if test="endTime != null and endTime != ''">end_time=#{endTime},</if>
+    <if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
+    <if test="createDate != null">create_date=#{createDate},</if>
+    <if test="updateDate != null">update_date=#{updateDate},</if>
+    <if test="status != null">status=#{status}</if>
+  </sql>
+  <sql id="couponSelector">
+    select
+      <include refid="columns"/>
+    from
+      <include refid="tableName"/>
+    AS c
+  </sql>
+
+  <sql id="couponWhere">
+    <where>
+      <if test="id != null and id != ''">
+        id = #{id}
+      </if>
+      <choose>
+        <when test="status != null and status !=''">
+          AND status = #{status}
+        </when>
+        <otherwise>
+          AND status != 'DELETE'
+        </otherwise>
+      </choose>
+    </where>
+  </sql>
+
+  <sql id="couponUpdate">
+    <trim prefix="SET" suffixOverrides=",">
+      <include refid="couponIf"/>
+    </trim>
+  </sql>
+
+<!-- =================================================================== -->
+
+  <select id="load" parameterType="coupon" resultType="coupon">
+    <include refid="couponSelector"/>
+    <include refid="couponWhere"/>
+  </select>
+
+  <!-- 获取全部 -->
+  <select id="loadAll" resultType="coupon">
+    <include refid="couponSelector"/>
+    <include refid="couponWhere"/>
+  </select>
+
+  <!-- 更新 -->
+  <update id="update" parameterType="coupon">
+    UPDATE <include refid="tableName"/>
+    <include refid="couponUpdate"/>
+    <include refid="couponWhere"/>
+  </update>
+  <!-- 插入 -->
+  <insert id="save" parameterType="coupon">
+    INSERT INTO
+    <include refid="tableName"/>
+    (
+    <include refid="insertColumns"/>
+    )
+    VALUES
+    (
+    #{id},#{name},#{type},#{faceValue},#{delayDay},#{isFree},#{isReuse},
+    #{enoughMoney},#{discount},#{includeGroup},#{excludeGroup},#{beginTime},#{endTime},
+    #{remarks},#{createDate},#{updateDate},#{status}
+    )
+  </insert>
+
+</mapper>
+
