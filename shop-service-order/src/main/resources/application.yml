@@ -9,9 +9,9 @@ eureka:
 
 spring:
   application:
-    name: user-service
+    name: order-service
   datasource:
-    name: service-user
+    name: service-order
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/wx-shop
     username: root
@@ -39,7 +39,7 @@ mybatis:
   type-aliases-package: com.github.chengzhx76.service.order.api.entity
   mapper-locations: classpath:mapper/*.xml
   configuration:
-    database-id: service-user
+    database-id: service-order
     # 开启字段名和属性名驼峰匹配
     map-underscore-to-camel-case: true
     # 全局启用或禁用延迟加载。当禁用时，所有关联对象都会即时加载
