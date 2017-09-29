@@ -10,23 +10,18 @@
         <module>shop-common</module>
         <module>shop-common-entity</module>
         <module>shop-common-service</module>
-        <module>shop-service-user-api</module>
         <module>shop-consumer-test</module>
-        <module>shop-service-cart-api</module>
         <module>shop-service-cart</module>
-        <module>shop-service-order-api</module>
         <module>shop-service-order</module>
-        <module>shop-service-system-api</module>
         <module>shop-service-system</module>
         <module>shop-common-redis</module>
         <module>shop-service-comment</module>
-        <module>shop-service-comment-api</module>
         <module>shop-service-promotion</module>
-        <module>shop-service-promotion-api</module>
+
         <module>shop-service-product</module>
-        <module>shop-service-product-api</module>
         <module>shop-service-message</module>
-        <module>shop-service-message-api</module>
+        <module>shop-service-api</module>
+        <module>shop-service-base</module>
     </modules>
 
     <parent>
