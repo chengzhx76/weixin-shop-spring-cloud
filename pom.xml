@@ -19,6 +19,8 @@
         <module>shop-service-system-api</module>
         <module>shop-service-system</module>
         <module>shop-common-redis</module>
+        <module>shop-service-comment</module>
+        <module>shop-service-comment-api</module>
     </modules>
 
     <parent>
@@ -77,6 +79,11 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>shop-service-system-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>shop-service-comment-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

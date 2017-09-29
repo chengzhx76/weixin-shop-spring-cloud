@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.chengzhx76.service.system.dao.AdDaoMapper">
+  <sql id="tableName">ad</sql>
+  <sql id="columns">
+    a.id,a.name,a.picture_url,a.link_url,a.width,a.height,a.priority,a.is_enable,
+    a.remarks,a.create_date,a.update_date,a.status
+  </sql>
+  <sql id="insertColumns">
+    id,name,picture_url,link_url,width,height,priority,is_enable,remarks,create_date,update_date,status
+  </sql>
+  <sql id="adIf">
+    <if test="id != null and id != ''">id=#{id},</if>
+    <if test="name != null and name != ''">name=#{name},</if>
+    <if test="pictureUrl != null and pictureUrl != ''">picture_url=#{pictureUrl},</if>
+    <if test="linkUrl != null and linkUrl != ''">link_url=#{linkUrl},</if>
+    <if test="width != null and width != ''">width=#{width},</if>
+    <if test="height != null and height != ''">height=#{height},</if>
+    <if test="priority != null and priority != ''">priority=#{priority},</if>
+    <if test="isEnable != null and isEnable != ''">is_enable=#{isEnable},</if>
+    <if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
+    <if test="createDate != null and createDate != ''">create_date=#{createDate},</if>
+    <if test="updateDate != null and updateDate != ''">update_date=#{updateDate},</if>
+    <if test="status != null and status != ''">status=#{status}</if>
+  </sql>
+  <sql id="adSelector">
+    select
+      <include refid="columns"/>
+    from
+      <include refid="tableName"/> AS a
+  </sql>
+
+  <sql id="adWhere">
+    <where>
+      <if test="id != null and id != ''">
+        id = #{id}
+      </if>
+      <choose>
+        <when test="status != null and status !=''">
+          AND status = #{status}
+        </when>
+        <otherwise>
+          AND status != 'DELETE'
+        </otherwise>
+      </choose>
+    </where>
+  </sql>
+
+  <sql id="adUpdate">
+    <trim prefix="SET" suffixOverrides=",">
+      <include refid="adIf"/>
+    </trim>
+  </sql>
+
+<!-- =================================================================== -->
+
+  <!-- 根据ID获取图片 -->
+  <select id="load" parameterType="Ad" resultType="Ad">
+    <include refid="adSelector"/>
+    <include refid="adWhere"/>
+  </select>
+  <!-- 获取全部图片信息 -->
+  <select id="loadAll" resultType="Ad">
+    <include refid="adSelector"/>
+    <include refid="adWhere"/>
+  </select>
+
+  <!-- 更新 -->
+  <update id="update" parameterType="Ad">
+    UPDATE <include refid="tableName"/>
+    <include refid="adUpdate"/>
+    <include refid="adWhere"/>
+  </update>
+  <!-- 插入 -->
+  <insert id="save" parameterType="Ad">
+    INSERT INTO
+    <include refid="tableName"/>
+    (
+    <include refid="insertColumns"/>
+    )
+    VALUES
+    <include refid="adIf"/>
+  </insert>
+
+  <!-- =================================================================== -->
+  <!-- 获取首页所有图片广告 -->
+  <select id="loadIndexAds" resultType="Ad">
+    <include refid="adSelector"/>
+    LEFT JOIN ad_join_position ajp ON (ajp.ad_id = a.id)
+    LEFT JOIN ad_position ap ON (ap.id = ajp.ad_position_id)
+    where ap.type = "INDEX";
+  </select>
+</mapper>
+

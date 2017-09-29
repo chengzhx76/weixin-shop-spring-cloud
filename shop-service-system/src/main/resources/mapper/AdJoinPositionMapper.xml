@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.chengzhx76.service.system.dao.AdJoinPositionDaoMapper">
+  <sql id="tableName">ad_join_position</sql>
+  <sql id="columns">
+    a.id,a.ad_id,a.ad_position_id,a.create_date,a.update_date,a.status
+  </sql>
+  <sql id="insertColumns">
+    id,ad_id,ad_position_id,create_date,update_date,status
+  </sql>
+  <sql id="adJoinPositionIf">
+    <if test="id != null and id != ''">id=#{id},</if>
+    <if test="adId != null and adId != ''">name=#{ad_id},</if>
+    <if test="adPositionId != null and adPositionId != ''">ad_position_id=#{adPositionId},</if>
+    <if test="createDate != null and createDate != ''">create_date=#{createDate},</if>
+    <if test="updateDate != null and updateDate != ''">update_date=#{updateDate},</if>
+    <if test="status != null and status != ''">status=#{status}</if>
+  </sql>
+  <sql id="adJoinPositionSelector">
+    select
+      <include refid="columns"/>
+    from
+      <include refid="tableName"/> AS a
+  </sql>
+
+  <sql id="adJoinPositionWhere">
+    <where>
+      <if test="id != null and id != ''">
+        id = #{id}
+      </if>
+      <choose>
+        <when test="status != null and status !=''">
+          AND status = #{status}
+        </when>
+        <otherwise>
+          AND status != 'DELETE'
+        </otherwise>
+      </choose>
+    </where>
+  </sql>
+
+  <sql id="adJoinPositionUpdate">
+    <trim prefix="SET" suffixOverrides=",">
+      <include refid="adJoinPositionIf"/>
+    </trim>
+  </sql>
+
+<!-- =================================================================== -->
+
+  <!-- 根据ID获取图片 -->
+  <select id="load" parameterType="Ad" resultType="Ad">
+    <include refid="adJoinPositionSelector"/>
+    <include refid="adJoinPositionWhere"/>
+  </select>
+  <!-- 获取全部图片信息 -->
+  <select id="loadAll" resultType="Ad">
+    <include refid="adJoinPositionSelector"/>
+    <include refid="adJoinPositionWhere"/>
+  </select>
+
+  <!-- 更新 -->
+  <update id="update" parameterType="Ad">
+    UPDATE <include refid="tableName"/>
+    <include refid="adJoinPositionUpdate"/>
+    <include refid="adJoinPositionWhere"/>
+  </update>
+  <!-- 插入 -->
+  <insert id="save" parameterType="Ad">
+    INSERT INTO
+    <include refid="tableName"/>
+    (
+    <include refid="insertColumns"/>
+    )
+    VALUES
+    <include refid="adJoinPositionIf"/>
+  </insert>
+
+</mapper>
+

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.chengzhx76.service.system.dao.SystemParamDaoMapper">
+  <sql id="tableName">system_param</sql>
+  <sql id="columns">
+    s.id,s.name,s.title,s.logo,s.description,s.copyright,
+    s.remarks,s.create_date,s.update_date,s.status
+  </sql>
+  <sql id="insertColumns">
+    id,title,content,link_url,remarks,create_date,update_date,status
+  </sql>
+  <sql id="systemParamIf">
+    <if test="id != null and id != ''">id=#{id},</if>
+    <if test="name != null and name != ''">name=#{name},</if>
+    <if test="logo != null and logo != ''">logo=#{logo},</if>
+    <if test="description != null and description != ''">description=#{description},</if>
+    <if test="copyright != null and copyright != ''">copyright=#{copyright},</if>
+    <if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
+    <if test="createDate != null and createDate != ''">create_date=#{createDate},</if>
+    <if test="updateDate != null and updateDate != ''">update_date=#{updateDate},</if>
+    <if test="status != null and status != ''">status=#{status}</if>
+  </sql>
+  <sql id="systemParamSelector">
+    select
+      <include refid="columns"/>
+    from
+      <include refid="tableName"/> AS n
+  </sql>
+
+  <sql id="systemParamWhere">
+    <where>
+      <if test="id != null and id != ''">
+        id = #{id}
+      </if>
+      <choose>
+        <when test="status != null and status !=''">
+          AND status = #{status}
+        </when>
+        <otherwise>
+          AND status != 'DELETE'
+        </otherwise>
+      </choose>
+    </where>
+  </sql>
+
+  <sql id="systemParamUpdate">
+    <trim prefix="SET" suffixOverrides=",">
+      <include refid="systemParamIf"/>
+    </trim>
+  </sql>
+
+<!-- =================================================================== -->
+
+  <!-- 根据ID获取图片 -->
+  <select id="load" parameterType="systemParam" resultType="systemParam">
+    <include refid="systemParamSelector"/>
+    <include refid="systemParamWhere"/>
+  </select>
+  <!-- 获取全部图片信息 -->
+  <select id="loadAll" resultType="systemParam">
+    <include refid="systemParamSelector"/>
+    <include refid="systemParamWhere"/>
+  </select>
+
+  <!-- 更新 -->
+  <update id="update" parameterType="systemParam">
+    UPDATE <include refid="tableName"/>
+    <include refid="systemParamUpdate"/>
+    <include refid="systemParamWhere"/>
+  </update>
+  <!-- 插入 -->
+  <insert id="save" parameterType="systemParam">
+    INSERT INTO
+    <include refid="tableName"/>
+    (
+    <include refid="insertColumns"/>
+    )
+    VALUES
+    (
+    #{id},#{name},#{title},#{logo},#{description},#{copyright},
+    #{remarks},#{createDate},#{updateDate},#{status}
+    )
+  </insert>
+
+</mapper>
+
