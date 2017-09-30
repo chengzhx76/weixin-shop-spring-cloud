@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.chengzhx76.service.message.dao.SmsHistoryDaoMapper">
+  <sql id="tableName">sms_history</sql>
+  <sql id="columns">
+    s.id,s.phone,s.content,s.timeout,s.type,s.sender,s.receiver_id,s.user_ip,s.validate,
+    s.remarks,s.create_date,s.update_date,s.status
+  </sql>
+  <sql id="insertColumns">
+    id,phone,content,timeout,type,sender,receiver_id,user_ip,validate,
+    remarks,create_date,update_date,status
+  </sql>
+  <sql id="smsHistoryIf">
+    <if test="id != null and id != ''">id=#{id},</if>
+    <if test="phone != null and phone != ''">phone=#{phone},</if>
+    <if test="content != null and content != ''">content=#{content},</if>
+    <if test="timeout != null and timeout != ''">timeout=#{timeout},</if>
+    <if test="type != null and type != ''">type=#{type},</if>
+    <if test="sender != null and sender != ''">sender=#{sender},</if>
+    <if test="receiverId != null and receiverId != ''">receiver_id=#{receiverId},</if>
+    <if test="userIp != null and userIp != ''">user_ip=#{userIp},</if>
+    <if test="validate != null and validate != ''">validate=#{validate},</if>
+    <if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
+    <if test="createDate != null and createDate != ''">create_date=#{createDate},</if>
+    <if test="updateDate != null and updateDate != ''">update_date=#{updateDate},</if>
+    <if test="status != null and status != ''">status=#{status}</if>
+  </sql>
+  <sql id="smsHistorySelector">
+    select
+      <include refid="columns"/>
+    from
+      <include refid="tableName"/> AS s
+  </sql>
+
+  <sql id="smsHistoryWhere">
+    <where>
+      <if test="id != null and id != ''">
+        id = #{id}
+      </if>
+      <if test="phone != null and phone != ''">
+        AND phone = #{phone}
+      </if>
+      <if test="type != null and type != ''">
+        AND type = #{type}
+      </if>
+      <choose>
+        <when test="status != null and status !=''">
+          AND status = #{status}
+        </when>
+        <otherwise>
+          AND status != 'DELETE'
+        </otherwise>
+      </choose>
+    </where>
+  </sql>
+
+  <sql id="smsHistoryUpdate">
+    <trim prefix="SET" suffixOverrides=",">
+      <include refid="smsHistoryIf"/>
+    </trim>
+  </sql>
+
+<!-- =================================================================== -->
+
+  <!-- 根据ID获取图片 -->
+  <select id="load" parameterType="SmsHistory" resultType="SmsHistory">
+    <include refid="smsHistorySelector"/>
+    <include refid="smsHistoryWhere"/>
+  </select>
+  <!-- 获取全部图片信息 -->
+  <select id="loadAll" resultType="SmsHistory">
+    <include refid="smsHistorySelector"/>
+    <include refid="smsHistoryWhere"/>
+  </select>
+
+  <!-- 更新 -->
+  <update id="update" parameterType="SmsHistory">
+    UPDATE <include refid="tableName"/>
+    <include refid="smsHistoryUpdate"/>
+    <include refid="smsHistoryWhere"/>
+  </update>
+  <!-- 插入 -->
+  <insert id="save" parameterType="SmsHistory">
+    INSERT INTO
+    <include refid="tableName"/>
+    (
+    <include refid="insertColumns"/>
+    )
+    VALUES
+    (
+    #{id},#{phone},#{content},#{timeout},#{type},#{sender},#{receiverId},#{userIp},#{validate},
+    #{remarks},#{createDate},#{updateDate},#{status}
+    )
+  </insert>
+
+  <!-- ======================================= -->
+  <!-- 今天发送短信的个数 -->
+  <select id="loadOneDayCount" parameterType="SmsHistory" resultType="int">
+    SELECT COUNT(id) FROM
+    <include refid="tableName"/>
+    <include refid="smsHistoryWhere"/>
+    AND create_date &gt; #{startOfDay}
+  </select>
+
+  <!-- 当前IP发送短信的个数 -->
+  <select id="loadCurrentIpCount" parameterType="SmsHistory" resultType="int">
+    SELECT COUNT(id) FROM
+    <include refid="tableName"/>
+    <include refid="smsHistoryWhere"/>
+    AND user_ip = #{userIp}
+    AND create_date &gt; #{startOfDay}
+  </select>
+  <!-- 获取最新的一条记录 -->
+  <select id="loadNewByPhoneAndType" parameterType="SmsHistory" resultType="SmsHistory">
+    <include refid="smsHistorySelector"/>
+    <include refid="smsHistoryWhere"/>
+    ORDER BY create_date DESC
+    LIMIT 1
+  </select>
+
+</mapper>
+

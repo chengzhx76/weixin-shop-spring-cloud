@@ -1,6 +1,6 @@
 server:
   # 端口
-  port: 8090
+  port: 8087
 
 eureka:
   client:
@@ -9,9 +9,9 @@ eureka:
 
 spring:
   application:
-    name: order-service
+    name: message-service
   datasource:
-    name: service-order
+    name: message-order
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/wx-shop
     username: root
@@ -36,10 +36,10 @@ spring:
 
 # mybatis配置
 mybatis:
-  type-aliases-package: com.github.chengzhx76.service.order.api.entity
+  type-aliases-package: com.github.chengzhx76.service.message.api.entity
   mapper-locations: classpath:mapper/*.xml
   configuration:
-    database-id: service-order
+    database-id: service-message
     # 开启字段名和属性名驼峰匹配
     map-underscore-to-camel-case: true
     # 全局启用或禁用延迟加载。当禁用时，所有关联对象都会即时加载
@@ -54,5 +54,5 @@ pagehelper:
 # 日志
 logging:
   level:
-    com.github.chengzhx76.service.order.dao: DEBUG
+    com.github.chengzhx76.service.message.dao: DEBUG
 
