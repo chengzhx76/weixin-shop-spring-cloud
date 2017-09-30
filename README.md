@@ -1,6 +1,13 @@
-## 微信商城
+## 微信商城（weixin-shop）
 
-基于原来[Dubbo](https://github.com/chengzhx76/Weixin-Dubbo)项目改造成SpringCloud项目，欢迎Star
+weixin-shop是基于`Spring Cloud`微服务化开发平台，具有统一授权、认证后台管理系统，其中包含具备用户管理、资源权限管理、网关API管理等多个模块，支持多业务系统并行开发，可以用来学习了解Spring Cloud各个组件的功能。代码简洁，架构清晰，适合学习和直接项目中使用。核心技术采用Eureka、Fegin、Ribbon、Zuul、Hystrix、Security、Mybatis等主要框架和中间件，前端[vue-shop](https://github.com/chengzhx76/vue-shop)采用Vue全家桶组件，欢迎Star。 
+
+QQ群号：169824183
+
+
+如果想了解Dubbo版本[Weixin-Dubbo](https://github.com/chengzhx76/Weixin-Dubbo)
+
+
 
 ```
 weixin-shop-spring-cloud
