@@ -13,11 +13,11 @@
 
     <dependencies>
         <dependency>
-            <groupId>shop-service-api</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>shop-service-user-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>shop-service-api</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>shop-service-cart-api</artifactId>
         </dependency>
         <dependency>

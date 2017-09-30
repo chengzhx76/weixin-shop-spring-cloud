@@ -2,18 +2,25 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.4.RELEASE</version>
+    </parent>
+
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
     <modules>
         <module>shop-service-user</module>
-        <module>shop-common-config</module>
         <module>shop-common</module>
+        <module>shop-common-config</module>
         <module>shop-common-service</module>
+        <module>shop-common-redis</module>
         <module>shop-consumer-test</module>
         <module>shop-service-cart</module>
         <module>shop-service-order</module>
         <module>shop-service-system</module>
-        <module>shop-common-redis</module>
         <module>shop-service-comment</module>
         <module>shop-service-promotion</module>
         <module>shop-service-product</module>
@@ -21,12 +28,6 @@
         <module>shop-service-api</module>
         <module>shop-service-base</module>
     </modules>
-
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.4.RELEASE</version>
-    </parent>
 
     <groupId>com.github.chengzhx76</groupId>
     <artifactId>weixin-shop-spring-cloud</artifactId>
@@ -57,47 +58,47 @@
             </dependency>
 
             <dependency>
-                <groupId>shop-service-api</groupId>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>shop-common-entity</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>shop-service-api</groupId>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>shop-service-user-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>shop-service-api</groupId>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>shop-service-cart-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>shop-service-api</groupId>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>shop-service-order-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>shop-service-api</groupId>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>shop-service-system-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>shop-service-api</groupId>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>shop-service-comment-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>shop-service-api</groupId>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>shop-service-promotion-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>shop-service-api</groupId>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>shop-service-product-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>shop-service-api</groupId>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>shop-service-message-api</artifactId>
                 <version>${project.version}</version>
             </dependency>

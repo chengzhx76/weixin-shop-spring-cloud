@@ -21,7 +21,7 @@
             <artifactId>shop-common</artifactId>
         </dependency>
         <dependency>
-            <groupId>shop-service-api</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>shop-service-promotion-api</artifactId>
         </dependency>
         <!-- Spring -->

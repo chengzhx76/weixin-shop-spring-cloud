@@ -23,7 +23,7 @@
         </dependency>
 
         <dependency>
-            <groupId>shop-service-api</groupId>
+            <groupId>com.github.chengzhx76</groupId>
             <artifactId>shop-service-user-api</artifactId>
         </dependency>
 

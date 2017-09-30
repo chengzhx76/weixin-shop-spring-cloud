@@ -23,7 +23,7 @@
         </dependency>
 
         <dependency>
-            <groupId>shop-service-api</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>shop-service-comment-api</artifactId>
         </dependency>
 

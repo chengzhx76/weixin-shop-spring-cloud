@@ -1,0 +1,19 @@
+卷 文档 的文件夹 PATH 列表
+卷序列号为 0000-05BF
+ weixin-shop-spring-cloud
+├─shop-common
+├─shop-common-config
+├─shop-common-entity
+├─shop-common-redis
+├─shop-common-service
+├─shop-consumer-test
+├─shop-service-cart
+├─shop-service-cart-api
+├─shop-service-comment
+├─shop-service-comment-api
+├─shop-service-order
+├─shop-service-order-api
+├─shop-service-system
+├─shop-service-system-api
+├─shop-service-user
+├─shop-service-user-api

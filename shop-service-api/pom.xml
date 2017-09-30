@@ -24,12 +24,13 @@
     <module>shop-service-test-api</module>
   </modules>
 
-  <dependencies>
-    <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>shop-common-entity</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-  </dependencies>
-
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>shop-common-entity</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 </project>
