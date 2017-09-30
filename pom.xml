@@ -27,6 +27,7 @@
         <module>shop-service-message</module>
         <module>shop-service-api</module>
         <module>shop-service-base</module>
+        <module>shop-service-rabbitmq</module>
     </modules>
 
     <groupId>com.github.chengzhx76</groupId>
@@ -100,6 +101,11 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>shop-service-message-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>shop-service-mq-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

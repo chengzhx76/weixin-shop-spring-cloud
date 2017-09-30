@@ -1,6 +1,9 @@
 ## 微信商城（weixin-shop）
 
-weixin-shop是基于`Spring Cloud`微服务化开发平台，具有统一授权、认证后台管理系统，其中包含具备用户管理、资源权限管理、网关API管理等多个模块，支持多业务系统并行开发，可以用来学习了解Spring Cloud各个组件的功能。代码简洁，架构清晰，适合学习和直接项目中使用。核心技术采用Eureka、Fegin、Ribbon、Zuul、Hystrix、Security、Mybatis等主要框架和中间件，前端[vue-shop](https://github.com/chengzhx76/vue-shop)采用Vue全家桶组件，欢迎Star。 
+weixin-shop是基于`Spring Cloud`微服务化电商平台，每个模块单独封装，如有某个模块不能满足业务，可以单独进行改造，无需关心其他模块功能，
+各个模块之间通过Fegin调用，多业务系统并行开发，可以用来学习了解Spring Cloud各个组件的功能，了解电商的业务。
+代码简洁，架构清晰，适合学习和直接项目中使用；核心技术采用Eureka、Fegin、Ribbon、Zuul、Hystrix、Security、Mybatis、Druid等主要框架和中间件，
+前端[vue-shop](https://github.com/chengzhx76/vue-shop)采用Vue全家桶组件，欢迎Star。 
 
 如果想了解Dubbo版本[Weixin-Dubbo](https://github.com/chengzhx76/Weixin-Dubbo)
 

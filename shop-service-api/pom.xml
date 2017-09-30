@@ -23,6 +23,7 @@
     <module>shop-service-message-api</module>
     <module>shop-service-test-api</module>
     <module>shop-mq-model</module>
+    <module>shop-service-mq-api</module>
   </modules>
 
   <dependencyManagement>
