@@ -33,6 +33,12 @@ spring:
       remove-abandoned-timeout: 180
       # 连接属性
       connection-properties: clientEncoding=UTF-8
+  rabbitmq:
+    host: 115.29.47.207
+    port: 5672
+    virtualHost: /test
+    username: chengzhx76
+    password: chengzhx76
 
 # mybatis配置
 mybatis:

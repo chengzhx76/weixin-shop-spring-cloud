@@ -12,10 +12,15 @@ import com.github.chengzhx76.shop.common.util.StringUtils;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+
+import static com.github.chengzhx76.mq.constant.QueueName.ACTIVITY;
+import static com.github.chengzhx76.mq.constant.QueueName.NOTICE;
+import static com.github.chengzhx76.mq.constant.QueueName.VALIDATE;
 
 /**
  * Desc: 短信服务
@@ -48,6 +53,7 @@ public class SmsServiceImpl implements SmsService {
         return smsHistoryDao.loadCurrentIpCount(smsHistory);
     }
     @Override
+    @RabbitListener(queues = VALIDATE)
     public void sendValidate(SmsModel smsModel) {
 
         int countByDay = getCountByDay(smsModel.getPhone());
@@ -91,6 +97,7 @@ public class SmsServiceImpl implements SmsService {
     }
 
     @Override
+    @RabbitListener(queues = NOTICE)
     public void sendNotice(SmsModel smsModel) {
         logger.info("==================> "+smsModel);
 
@@ -113,6 +120,7 @@ public class SmsServiceImpl implements SmsService {
     }
 
     @Override
+    @RabbitListener(queues = ACTIVITY)
     public void sendActivity(String msgData) {
         logger.info("==================> "+msgData);
     }

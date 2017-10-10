@@ -11,10 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("log/sms")
 public interface RabbitSmsService {
 
-    String VALIDATE = "SMS-VALIDATE";
-    String NOTICE = "SMS-NOTICE";
-    String ACTIVITY = "SMS-ACTIVITY";
-
     /**
      * 发送注册短消息
      * @param msgData
