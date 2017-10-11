@@ -28,6 +28,7 @@
         <module>shop-service-api</module>
         <module>shop-service-base</module>
         <module>shop-service-rabbitmq</module>
+        <module>shop-common-httpclient</module>
     </modules>
 
     <groupId>com.github.chengzhx76</groupId>
@@ -202,6 +203,18 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>1.2.38</version>
+            </dependency>
+
+            <!-- HttpClien -->
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>4.3.3</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpmime</artifactId>
+                <version>4.3.3</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

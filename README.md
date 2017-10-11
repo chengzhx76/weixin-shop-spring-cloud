@@ -13,6 +13,7 @@ weixin-shop是基于`Spring Cloud`微服务化电商平台，每个模块单独�
 weixin-shop-spring-cloud
 ├─shop-common                   // 抽取的公共模块
 ├─shop-common-config            // 暂时没用，以后考虑用springCloud-config实现
+├─shop-common-httpclient        // httpclient基础模块
 ├─shop-common-redis             // Redis基础模块
 ├─shop-common-service           // service、Dao基础模块
 ├─shop-consumer-test            // 消费者，主要用于测试下面的模块是否正常
@@ -35,6 +36,7 @@ weixin-shop-spring-cloud
 ├─shop-service-order            // 订单模块
 ├─shop-service-product          // 商品模块
 ├─shop-service-promotion        // 促销模块
+├─shop-service-rabbitmq         // 消息中间件模块
 ├─shop-service-system           // 系统模块
 ├─shop-service-user             // 用户模块
 ```
