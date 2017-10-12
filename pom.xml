@@ -29,6 +29,7 @@
         <module>shop-service-base</module>
         <module>shop-service-rabbitmq</module>
         <module>shop-common-httpclient</module>
+        <module>shop-web-mobile</module>
     </modules>
 
     <groupId>com.github.chengzhx76</groupId>
