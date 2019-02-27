@@ -7,6 +7,8 @@ weixin-shop是基于`Spring Cloud`微服务化电商平台，每个模块单独�
 
 如果想了解Dubbo版本[Weixin-Dubbo](https://github.com/chengzhx76/Weixin-Dubbo)
 
+欢迎大家star我的新项目[service-mpvue-mini](https://github.com/chengzhx76/service-mpvue-mini)每个后端程序员都要懂下前端 ^_^
+
 
 ## 项目结构
 ```
