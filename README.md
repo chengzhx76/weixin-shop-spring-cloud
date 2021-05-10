@@ -43,6 +43,6 @@ weixin-shop-spring-cloud
 ├─shop-service-user             // 用户模块
 ```
 
-QQ群号：55088109
+新的作品欢迎体验（布谷鸟助手）生活提醒小帮手，重要事不能忘~，后期可能考虑开源（基于`uni-app`构建）
 
-![image](https://github.com/chengzhx76/weixin-shop-spring-cloud/blob/master/resource/55088109.png)
+![image](https://github.com/chengzhx76/service-mpvue-mini/blob/master/resource/qrcode_remind.jpg)
